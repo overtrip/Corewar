@@ -6,7 +6,7 @@
 #    By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/25 15:08:49 by jealonso          #+#    #+#              #
-#    Updated: 2016/10/06 16:49:32 by jealonso         ###   ########.fr        #
+#    Updated: 2016/10/18 15:16:33 by jealonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ OBJSPATH	= objs
 LIBFT		= $(LFTPATH)/libft.a
 
 #FLAGS:
-LDFLAGS		= -L $(LFTPATH) -g3
+LDFLAGS		= -L $(LFTPATH)
 LDLIBS		= -lft
 PATHLIB		= -I $(INCPATH) -I $(LFTPATH)/$(INCPATH)
 CFLAGS		= -Wall -Wextra -Werror -g -O0 $(PATHLIB)
@@ -43,10 +43,11 @@ NAME 		= corewar
 
 #SRCRS:
 SRCS 		= \
-			error.c \
+			check_content.c \
 			main.c \
 			message.c \
-			op.c
+			op.c \
+			debug.c
 
 #OBJ:
 OBJS = $(patsubst %.c, $(OBJSPATH)/%.o, $(SRCS))

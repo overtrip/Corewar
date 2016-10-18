@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 14:01:08 by jealonso          #+#    #+#             */
-/*   Updated: 2016/09/29 16:05:22 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/10/15 14:44:54 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@ int	ft_lst_push_front(t_head *head, t_lst *elem)
 {
 	if (elem)
 	{
-		if (!head->head)
+		if (!head->first)
 		{
-			head->head = elem;
-			head->tail = elem;
+			head->first = elem;
+			head->last = elem;
 		}
 		else
 		{
-			head->head->prev = elem;
-			elem->next = head->head;
-			head->head = elem;
+			head->first->prev = elem;
+			elem->next = head->first;
+			head->first = elem;
 		}
 		head->size += 1;
 		return (1);

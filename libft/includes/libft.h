@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/09 17:14:13 by jealonso          #+#    #+#             */
-/*   Updated: 2016/10/05 15:09:45 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/10/14 17:30:41 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ typedef struct		s_lst
 typedef struct		s_head
 {
 	size_t			size;
-	struct s_lst	*head;
-	struct s_lst	*tail;
+	struct s_lst	*first;
+	struct s_lst	*last;
 }					t_head;
 
 /*
@@ -57,7 +57,7 @@ typedef struct		s_head
 */
 
 t_head	*ft_lst_init_head(t_head *head, t_lst *elem);
-t_lst	*ft_create_no_malloc(void *data);
+t_lst	*ft_lst_create_no_malloc(void *data);
 t_lst	*ft_lst_match(t_head *head, void *data, int (*cmp)(void *, void *));
 t_lst	*ft_lst_pop(t_head *head, size_t pos);
 int		ft_lst_foreach(t_head *head, int (*func)(void *));

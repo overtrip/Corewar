@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/30 16:59:49 by jealonso          #+#    #+#             */
-/*   Updated: 2016/09/30 17:27:58 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/10/18 13:34:55 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,18 @@
 void	ft_lst_del(t_head *head)
 {
 	t_lst	*save;
+	t_lst	*current;
 
-	while (head->head != head->tail)
+	if (!head)
+		return ;
+	current = head->first;
+	while (current)
 	{
-		save = head->head;
-		head->head = head->head->next;
+		save = current;
+		current = current->next;
+		free(save->data);
 		free(save);
 	}
-	free(head->tail);
-	free(head);
+	head->first = NULL;
+	head->last = NULL;
 }

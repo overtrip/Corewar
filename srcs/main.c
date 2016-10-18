@@ -6,62 +6,94 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/29 17:22:15 by jealonso          #+#    #+#             */
-/*   Updated: 2016/10/06 16:54:42 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/10/18 17:55:08 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
 /*
-**	TODO Call to parse instructions
+**	Dup the buffer, create and push back the new link
 */
+
+static int	get_line(t_head *champ, char *buff)
+{
+	t_lst	*new_line;
+	char	*tmp_buff;
+
+	if (!(tmp_buff = ft_strdup(buff)))
+		return (send_id("no_maloc_data"));
+	ft_strdel(&buff);
+	if (!(new_line = ft_lst_create_no_malloc(tmp_buff)))
+		return (send_id("no_malloc_link"));
+	if (!ft_lst_push_back(champ, new_line))
+		return (send_id("no_malloc_link"));
+	return (0);
+}
 
 /*
 **	Initialise all to 0 or NULL
 */
 
-static void	init_null(t_head **files)
+static void	init_null(t_head *files)
 {
-	*files = NULL;
+	files->first = NULL;
+	files->last = NULL;
+}
+
+
+/*
+**	Delete champ data and buffer
+*/
+
+static void	delete_all(t_head *champ, char *buff)
+{
+	ft_lst_del(champ);
+	ft_strdel(&buff);
 }
 
 /*
-**	Calling to  open and close files
+**	Calling to open and close files
 */
 
-int	open_files(char *file_name, t_head *files)
+static int	open_files(char *file_name)
 {
-	int	res_open;
+	int		res_open;
+	int		i;
+	char	*buff;
+	t_head	champ;
 
+	i = 0;
+	init_null(&champ);
 	if ((res_open = open(file_name, O_RDONLY)) < 0)
 		return (send_id("open"));
 	else
 	{
-		if (error_read(files))
-			printf("TODO cas erreur\n");
-		else
-			printf("TODO cas normal\n");
+		while (get_next_line(res_open, &buff) > 0)
+			if (get_line(&champ, buff))
+				i = 1;
+		if (check_content(&champ))
+				i = 1;
 	}
+	delete_all(&champ, buff);
 	if (close(res_open) < 0)
 		return (send_id("close"));
-	return (0);
+	return (i);
 }
 
 /*
 **	You know that
 */
 
-int	main(int argc, char **argv)
+int			main(int argc, char **argv)
 {
 	int	i;
-	t_head	*files;
 
 	i = 0;
-	init_null(&files);
 	if (argc < 2 || argc > 5)
 		return (send_id("usage"));
 	while (++i < argc)
-		if (open_files(argv[i], files))
+		if (open_files(argv[i]))
 			return (1);
 	return (0);
 }

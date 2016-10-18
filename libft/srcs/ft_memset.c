@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/03 11:12:09 by jealonso          #+#    #+#             */
-/*   Updated: 2015/11/28 13:17:08 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/10/18 15:23:47 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ void	*ft_memset(void *s, int c, size_t n)
 	i = -1;
 	if (n == 0)
 		return (s);
-	while (++i <= n)
+	while (++i < n)
 		p1[i] = c;
-	p1[++i] = c;
 	return (s);
 }

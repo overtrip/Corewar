@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/30 16:28:49 by jealonso          #+#    #+#             */
-/*   Updated: 2016/10/05 13:33:43 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/10/15 17:08:17 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ t_lst	*ft_lst_create_no_malloc(void *data)
 	else
 	{
 		new->data = data;
-		new	->prev = NULL;
-		new	->next = NULL;
+		new->prev = NULL;
+		new->next = NULL;
 	}
 	return (new);
 }

@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/30 16:30:27 by jealonso          #+#    #+#             */
-/*   Updated: 2016/09/30 16:38:18 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/10/15 14:38:04 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ int		ft_lst_foreach(t_head *head, int (*func)(void *))
 	t_head *tmp;
 
 	tmp = head;
-	while (tmp->head)
+	while (tmp->first)
 	{
-		if (!(*func)(tmp->head))
+		if (!(*func)(tmp->first))
 			return (0);
-		tmp->head = tmp->head->next;
+		tmp->first = tmp->first->next;
 	}
 	return (1);
 }

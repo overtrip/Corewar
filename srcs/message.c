@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 15:26:20 by jealonso          #+#    #+#             */
-/*   Updated: 2016/10/06 16:04:30 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/10/18 17:35:12 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@ const t_mess g_usage_tab[INDEX] =
 	{"usage", "Usage : corewar file.s"},
 	{"open", "Error : can't open file"},
 	{"close", "Error : can't close file"},
+	{"no_malloc_head", "Error : can't allocate size for a champion"},
+	{"no_malloc_link", "Error : can't allocate size for a new link"},
+	{"no_malloc_data", "Error : can't allocate size to copy instruction"},
+	{"head&champ", "Error : They are no champions and no head of list"},
+	{"no_malloc_struct", "Error : can't allocate size for t_content"},
+	{"error_size", "Error : size of name is too big"};
 	{"", "Error"}
 };
 
