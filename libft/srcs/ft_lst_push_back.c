@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 13:51:47 by jealonso          #+#    #+#             */
-/*   Updated: 2016/10/15 16:57:11 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/10/25 16:37:11 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_lst_push_back(t_head *head, t_lst *elem)
 {
 	if (!(head && elem))
-		return 0;
+		return (0);
 	elem->prev = head->last;
 	elem->next = NULL;
 	if (!head->first)

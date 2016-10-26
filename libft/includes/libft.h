@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/09 17:14:13 by jealonso          #+#    #+#             */
-/*   Updated: 2016/10/14 17:30:41 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/10/25 16:42:45 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
+# include "struct.h"
 # define BUF_SIZE	1
 # define RESET		"\e[0m"
 # define BLUE		"\e[0;34m"
@@ -24,33 +25,6 @@
 # define GREEN		"\e[0;32m"
 # define BACKRED	"\e[41m"
 # define WHITE		"\e[4;37m"
-
-typedef struct		s_list
-{
-	void			*data;
-	struct s_list	*next;
-}					t_list;
-
-typedef struct		s_read
-{
-	int				fd;
-	char			*content;
-	struct s_read	*next;
-}					t_read;
-
-typedef struct		s_lst
-{
-	void			*data;
-	struct s_lst	*prev;
-	struct s_lst	*next;
-}					t_lst;
-
-typedef struct		s_head
-{
-	size_t			size;
-	struct s_lst	*first;
-	struct s_lst	*last;
-}					t_head;
 
 /*
 **	Recast of list functions
@@ -68,7 +42,6 @@ void	ft_lst_del_match(t_head *head, void *data, int (*cmp)(void *, void *),
 												void (*del)(void *));
 void	ft_lst_del(t_head *head);
 
-
 int		ft_lst_first_match(t_head *head, void (*cmp)(void), void *data);
 void	ft_lst_print_elem(t_head *head, void (*print_data), void *data);
 void	ft_lst_print(t_head *head, void (*print_data));
@@ -85,7 +58,7 @@ int		ft_islower(int c);
 int		ft_isprint(int c);
 int		ft_isupper(int c);
 char	*ft_itoa(int n);
-t_list  *ft_list_push_back(t_list *list, t_list *new);
+t_list	*ft_list_push_back(t_list *list, t_list *new);
 void	*ft_memalloc(size_t size);
 void	*ft_memccpy(void *s1, const void *s2, int c, size_t n);
 void	*ft_memchr(const void *s, int c, size_t n);

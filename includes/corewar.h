@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 15:13:40 by jealonso          #+#    #+#             */
-/*   Updated: 2016/10/18 17:20:45 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/10/26 13:15:29 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,29 @@
 
 # include "libft.h"
 # include <stdio.h>
-#include <fcntl.h>
-#include "op.h"
+# include <fcntl.h>
+# include "op.h"
 
-# define INDEX 11
+/*
+**	Use for define size of errors message in (t_mess)
+*/
+
+# define INDEX			20
+
+/*
+**	Use to find if fiels exist and their formats
+*/
+
+# define FLAG_NAME		1
+# define FLAG_COMMENT	2
+# define FLAG_LABEL		4
+
+/*
+**	Macro for economized lines
+*/
+
+# define FLAG_N(flag)	(flag & FLAG_NAME)
+# define FLAG_C(flag)	(flag & FLAG_COMMENT)
 
 /*
 **	Define a strusture who contain all error massage
@@ -30,16 +49,17 @@ typedef struct		s_mess
 	char			*message;
 }					t_mess;
 
-int		print_message(int i);
-int		send_id(char *str);
-int		error_read(t_head *files);
-int		check_content(t_head *champ);
+int					print_message(int i);
+int					send_id(char *str, int line);
+int					error_read(t_head *files);
+int					check_content(t_lst *champ);
+int					find_prerequis(char *data, unsigned char *flag, int line);
 
 /*
 **	Use to debuging in debug.c
 */
 
-void	print_champ_data(t_head *champ);
-void	print_content(char **tab);
+void				print_champ_data(t_head *champ);
+void				print_content(char **tab);
 
 #endif

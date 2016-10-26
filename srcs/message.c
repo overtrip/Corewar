@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 15:26:20 by jealonso          #+#    #+#             */
-/*   Updated: 2016/10/18 17:35:12 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/10/26 13:14:40 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ const t_mess g_usage_tab[INDEX] =
 {
 	{"empty", ""},
 	{"file", "File.s"},
-	{"usage", "Usage : corewar file.s"},
+	{"usage", "Usage : corewar <file.s>"},
 	{"open", "Error : can't open file"},
 	{"close", "Error : can't close file"},
 	{"no_malloc_head", "Error : can't allocate size for a champion"},
@@ -28,7 +28,11 @@ const t_mess g_usage_tab[INDEX] =
 	{"no_malloc_data", "Error : can't allocate size to copy instruction"},
 	{"head&champ", "Error : They are no champions and no head of list"},
 	{"no_malloc_struct", "Error : can't allocate size for t_content"},
-	{"error_size", "Error : size of name is too big"};
+	{"error_size", "Error : size of field is too big"},
+	{"name", "File content two name"},
+	{"comment", "File content two comment"},
+	{"no_quote", "they are no quote"},
+	{"syntax", "Syntax error"},
 	{"", "Error"}
 };
 
@@ -36,7 +40,7 @@ const t_mess g_usage_tab[INDEX] =
 **	Find a key_word for send to print_messge function
 */
 
-int	send_id(char *str)
+int	send_id(char *str, int line)
 {
 	int	i;
 
@@ -44,7 +48,18 @@ int	send_id(char *str)
 	while (i < INDEX)
 	{
 		if (!ft_strcmp(g_usage_tab[i].key_word, str))
-			return (print_message(i));
+		{
+			if (line < 0)
+				return (print_message(i));
+			else
+			{
+				print_message(i);
+				ft_putstr(" [line ");
+				ft_putnbr(line);
+				ft_putstr("]\n");
+				return (1);
+			}
+		}
 		++i;
 	}
 	return (print_message(i));
@@ -82,6 +97,6 @@ int	compatible_file(char *str)
 
 int	print_message(int i)
 {
-	ft_putendl_fd(g_usage_tab[i].message, 2);
+	ft_putstr_fd(g_usage_tab[i].message, 2);
 	return (1);
 }

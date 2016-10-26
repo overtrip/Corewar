@@ -6,11 +6,12 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 16:03:39 by jealonso          #+#    #+#             */
-/*   Updated: 2016/10/18 15:03:04 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/10/25 16:29:45 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+
 /*
 **	TODO Use to debug
 */
