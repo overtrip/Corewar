@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 15:26:20 by jealonso          #+#    #+#             */
-/*   Updated: 2016/10/26 13:14:40 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/11/02 14:52:06 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,13 @@ const t_mess g_usage_tab[INDEX] =
 	{"error_size", "Error : size of field is too big"},
 	{"name", "File content two name"},
 	{"comment", "File content two comment"},
+	{"label", "Poorly positioned instruction"},
 	{"no_quote", "they are no quote"},
 	{"syntax", "Syntax error"},
-	{"", "Error"}
+	{"no_name", ".name field are missing"},
+	{"no_comment", ".comment field are missing"},
+	{"", "Error"},
+	{NULL, "String error doesn't exist try another"}
 };
 
 /*
@@ -45,23 +49,19 @@ int	send_id(char *str, int line)
 	int	i;
 
 	i = 0;
-	while (i < INDEX)
+	while (g_usage_tab[i].key_word && i < INDEX)
 	{
 		if (!ft_strcmp(g_usage_tab[i].key_word, str))
 		{
 			if (line < 0)
 				return (print_message(i));
 			else
-			{
-				print_message(i);
-				ft_putstr(" [line ");
-				ft_putnbr(line);
-				ft_putstr("]\n");
-				return (1);
-			}
+				return (print_message_line(i, line));
 		}
 		++i;
 	}
+	if (!g_usage_tab[i].key_word)
+		return (print_message(i));
 	return (print_message(i));
 }
 
@@ -92,11 +92,24 @@ int	compatible_file(char *str)
 }
 
 /*
+**	Print error with line
+*/
+
+int	print_message_line(int i, int line)
+{
+	ft_putstr_fd(g_usage_tab[i].message, 2);
+	ft_putstr_fd(" [line ", 2);
+	ft_putnbr_fd(line, 2);
+	ft_putstr_fd("]\n", 2);
+	return (1);
+}
+
+/*
 **	Print all error according to id message
 */
 
 int	print_message(int i)
 {
-	ft_putstr_fd(g_usage_tab[i].message, 2);
+	ft_putendl_fd(g_usage_tab[i].message, 2);
 	return (1);
 }

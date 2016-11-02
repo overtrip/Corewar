@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   size_instruction.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/20 10:54:27 by jealonso          #+#    #+#             */
-/*   Updated: 2016/05/20 16:48:40 by jealonso         ###   ########.fr       */
+/*   Created: 2016/10/26 15:44:38 by jealonso          #+#    #+#             */
+/*   Updated: 2016/11/02 14:50:06 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "corewar.h"
 
-int		ft_strcmp(const char *s1, const char *s2)
+/*
+**	Compare word with op.h and return the size of string
+*/
+
+static int	parse_with_size(char *data, unsigned int *size_in_bit)
 {
-	unsigned char *s1ptr;
-	unsigned char *s2ptr;
+	return (0);
+}
 
-	s1ptr = (unsigned char *)s1;
-	s2ptr = (unsigned char *)s2;
-	while (*s1ptr && (*s1ptr == *s2ptr))
-	{
-		s1ptr++;
-		s2ptr++;
-	}
-	return (*s1ptr - *s2ptr);
+/*
+**	TODO
+*/
+
+int			size_instruction(char *data, unsigned int *size_in_bit)
+{
+	parse_with_size(data, size_in_bit);
+	return (0);
 }

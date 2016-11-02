@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 15:13:40 by jealonso          #+#    #+#             */
-/*   Updated: 2016/10/26 13:15:29 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/11/02 15:16:16 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "libft.h"
 # include <stdio.h>
 # include <fcntl.h>
+# include <sys/stat.h>
 # include "op.h"
 
 /*
@@ -50,10 +51,12 @@ typedef struct		s_mess
 }					t_mess;
 
 int					print_message(int i);
+int					print_message_line(int i, int line);
 int					send_id(char *str, int line);
 int					error_read(t_head *files);
-int					check_content(t_lst *champ);
+int					check_content(t_lst *champ, char *file_name);
 int					find_prerequis(char *data, unsigned char *flag, int line);
+void				write_in_file(t_lst *data, char *file_name);
 
 /*
 **	Use to debuging in debug.c

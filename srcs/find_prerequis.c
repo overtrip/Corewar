@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/25 16:03:21 by jealonso          #+#    #+#             */
-/*   Updated: 2016/10/26 13:14:53 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/10/26 15:18:29 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	size_field(char *str, int line, int flag)
 			++sec;
 	if (!(first && sec))
 		return (send_id("no_quote", line));
-	if (sec && (*sec != '\0' && *sec != '#' && *sec != ';'))
+	if (sec && (*sec != '\0' && !ft_strchr(COMMENT_CHAR, *sec)))
 		return (send_id("syntax", line));
 	if ((flag == 1 && (sec - first) > PROG_NAME_LENGTH) ||
 			(flag == 2 && (sec - first) > COMMENT_LENGTH))

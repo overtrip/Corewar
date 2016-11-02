@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/29 17:22:15 by jealonso          #+#    #+#             */
-/*   Updated: 2016/10/25 16:33:54 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/10/31 15:17:06 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ static int	open_files(char *file_name)
 	char	*buff;
 	t_head	champ;
 
+	i = 0;
 	init_null(&champ, &line, &i);
 	if ((res_open = open(file_name, O_RDONLY)) < 0)
 		return (send_id("open", 0));
@@ -76,7 +77,7 @@ static int	open_files(char *file_name)
 			if (get_line(&champ, buff, line))
 				i = 1;
 		}
-		if (check_content(champ.first))
+		if (check_content(champ.first, file_name))
 			i = 1;
 	}
 	delete_all(&champ, buff);

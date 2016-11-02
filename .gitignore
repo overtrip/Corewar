@@ -1,0 +1,13 @@
+#exclude folder
+ressource_apprentissage
+ressources
+coreware.dSYM
+
+#exclude binaries
+corware
+
+#ignore himself
+.gitignore
+
+#exclude script
+*.sh

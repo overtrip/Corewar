@@ -6,7 +6,7 @@
 #    By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/25 15:08:49 by jealonso          #+#    #+#              #
-#    Updated: 2016/10/25 16:04:49 by jealonso         ###   ########.fr        #
+#    Updated: 2016/10/26 16:29:51 by jealonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ NAME 		= corewar
 #SRCRS:
 SRCS 		= \
 			check_content.c \
+			convers_to_hexa.c \
 			find_prerequis.c \
 			main.c \
 			message.c \
