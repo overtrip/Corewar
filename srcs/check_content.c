@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 14:31:12 by jealonso          #+#    #+#             */
-/*   Updated: 2016/11/02 14:45:31 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/11/02 15:44:26 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,6 @@ int	check_content(t_lst *champ, char *file_name)
 			return (1);*/
 		cpy = cpy->next;
 	}
-	write_in_file(champ, file_name);
+	open_new_file(champ, file_name);
 	return (0);
 }

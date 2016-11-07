@@ -6,31 +6,65 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 16:09:52 by jealonso          #+#    #+#             */
-/*   Updated: 2016/11/02 15:25:33 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/11/07 17:06:48 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void		write_instruction(t_lst *champ, int res_open)
+/*
+**	Swap int to little edian
+*/
+
+static void		swapped(unsigned int *num, unsigned int *size)
 {
-	t_lst	*cpy;
-	size_t	ret;
+	unsigned int	swapped;
+
+	swapped = ((*num >> 24) & 0xff) |
+	((*num << 8) & 0xff0000) |
+	((*num >> 8) & 0xff00) |
+	((*num << 24) & 0xff000000);
+	*num = swapped;
+	*size += 4;
+}
+
+/*
+**	Write in file all values converted
+*/
+
+static void		write_instruction(t_lst *champ, int res_open)
+{
+	t_lst			*cpy;
+	size_t			ret;
+	unsigned int	tmp;
+	int				line;
+	unsigned int	size;
 
 	cpy = champ;
+	tmp = COREWAR_EXEC_MAGIC;
+	line = 0;
+	size = 0;
+	swapped(&tmp, &size);
+	if ((ret = write(res_open, &tmp, size) < 0))
+		ft_putendl("ca ecrit pas");
 	while (cpy)
 	{
-		if ((ret = write(res_open, cpy->data, ft_strlen(cpy->data)) < 0))
-				ft_putendl("ca ecrit pas");
+		if (!ft_strncmp(cpy->data, NAME_CMD_STRING, ft_strlen(NAME_CMD_STRING)))
+			write_name(cpy->data, line, res_open, &size);
+		if (!ft_strncmp(cpy->data, COMMENT_CMD_STRING, ft_strlen(COMMENT_CMD_STRING)))
+			write_comment(cpy->data, line, res_open, &size);
+		//if ((ret = write(res_open, cpy->data, ft_strlen(cpy->data)) < 0))
+		//	ft_putendl("ca ecrit pas");
 		cpy = cpy->next;
 	}
+	printf("%d\n", size);
 }
 
 /*
 **	change name to create a writed in file.cor
 */
 
-static char	*change_name(char *file_name)
+static char		*change_name(char *file_name)
 {
 	char	*final_path;
 	char	*name;
@@ -53,7 +87,7 @@ static char	*change_name(char *file_name)
 **	Create, open, call a writen function and close the new file.cor
 */
 
-void		write_in_file(t_lst *champ, char *file_name)
+void			open_new_file(t_lst *champ, char *file_name)
 {
 	t_lst	*cpy;
 	int		res_open;
@@ -66,6 +100,4 @@ void		write_in_file(t_lst *champ, char *file_name)
 	if (close(res_open) < 0)
 		return ;
 	free(file_name);
-	while (cpy)
-		cpy = cpy->next;
 }

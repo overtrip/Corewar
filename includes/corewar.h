@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 15:13:40 by jealonso          #+#    #+#             */
-/*   Updated: 2016/11/02 15:16:16 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/11/07 16:33:42 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "libft.h"
 # include <stdio.h>
 # include <fcntl.h>
-# include <sys/stat.h>
 # include "op.h"
 
 /*
@@ -56,7 +55,11 @@ int					send_id(char *str, int line);
 int					error_read(t_head *files);
 int					check_content(t_lst *champ, char *file_name);
 int					find_prerequis(char *data, unsigned char *flag, int line);
-void				write_in_file(t_lst *data, char *file_name);
+void				open_new_file(t_lst *data, char *file_name);
+void				write_name(char *data, int line, int res_open,
+		unsigned int *size);
+void				write_comment(char *data, int line, int res_open,
+		unsigned int *size);
 
 /*
 **	Use to debuging in debug.c
