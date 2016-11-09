@@ -1,7 +1,7 @@
 #exclude folder
 ressource_apprentissage
 ressources
-coreware.dSYM
+corewar.dSYM
 
 #exclude binaries
 corware
@@ -11,3 +11,4 @@ corware
 
 #exclude script
 *.sh
+*.o

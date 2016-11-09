@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 15:13:40 by jealonso          #+#    #+#             */
-/*   Updated: 2016/11/07 16:33:42 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/11/09 14:35:39 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,12 @@ typedef struct		s_mess
 	char			*message;
 }					t_mess;
 
+typedef struct		s_order
+{
+	int				pos;
+	char			*label;
+}					t_order;
+
 int					print_message(int i);
 int					print_message_line(int i, int line);
 int					send_id(char *str, int line);
@@ -56,9 +62,9 @@ int					error_read(t_head *files);
 int					check_content(t_lst *champ, char *file_name);
 int					find_prerequis(char *data, unsigned char *flag, int line);
 void				open_new_file(t_lst *data, char *file_name);
-void				write_name(char *data, int line, int res_open,
+void				write_name(char *data, header_t *head,
 		unsigned int *size);
-void				write_comment(char *data, int line, int res_open,
+void				write_comment(char *data, header_t *head,
 		unsigned int *size);
 
 /*
