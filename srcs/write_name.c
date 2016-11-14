@@ -6,17 +6,29 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 15:27:21 by jealonso          #+#    #+#             */
-/*   Updated: 2016/11/08 16:28:21 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/11/14 17:26:21 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
 /*
+**	Print header file.cor
+*/
+
+void			print_header(t_header head, int res_open)
+{
+	write(res_open, &head.magic, 4);
+	write(res_open, &head.prog_name, PROG_NAME_LENGTH + 4);
+	write(res_open, &head.prog_size, 4);
+	write(res_open, &head.comment, COMMENT_LENGTH + 4);
+}
+
+/*
 **	Allocate and create name field
 */
 
-void	write_name(char *data, header_t *head, unsigned int *size)
+void	write_name(char *data, t_header *head, unsigned int *size)
 {
 	char	*first;
 	char	*end;
@@ -34,7 +46,7 @@ void	write_name(char *data, header_t *head, unsigned int *size)
 **	Allocate and create comment field
 */
 
-void	write_comment(char *data, header_t *head, unsigned int *size)
+void	write_comment(char *data, t_header *head, unsigned int *size)
 {
 	char	*first;
 	char	*end;

@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 16:09:52 by jealonso          #+#    #+#             */
-/*   Updated: 2016/11/08 16:25:38 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/11/14 17:27:32 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,24 +29,12 @@ static void		swapped(unsigned int *num, unsigned int *size)
 }
 
 /*
-**	Print header file.cor
-*/
-
-void			print_header(header_t head, int res_open)
-{
-	write(res_open, &head.magic, 4);
-	write(res_open, &head.prog_name, PROG_NAME_LENGTH + 4);
-	write(res_open, &head.prog_size, 4);
-	write(res_open, &head.comment, COMMENT_LENGTH + 4);
-}
-
-/*
 **	Initialise header of champ
 */
 
-static void		init_head(header_t *head, unsigned int *size)
+static void		init_head(t_header *head, unsigned int *size)
 {
-	ft_bzero(head, sizeof(header_t));
+	ft_bzero(head, sizeof(t_header));
 	head->magic = COREWAR_EXEC_MAGIC;
 	swapped(&head->magic, size);
 	head->prog_size = 0;
@@ -60,20 +48,24 @@ static void		init_head(header_t *head, unsigned int *size)
 static void		write_instruction(t_lst *champ, int res_open)
 {
 	t_lst			*cpy;
-	header_t		head;
+	t_header		head;
 	int				line;
 	unsigned int	size;
+	t_order			*label_list;
 
 	cpy = champ;
 	line = 0;
 	size = 0;
+	label_list = NULL;
 	init_head(&head, &size);
 	while (cpy)
 	{
 		if (!ft_strncmp(cpy->data, NAME_CMD_STRING, ft_strlen(NAME_CMD_STRING)))
 			write_name(cpy->data, &head, &size);
-		if (!ft_strncmp(cpy->data, COMMENT_CMD_STRING, ft_strlen(COMMENT_CMD_STRING)))
+		if (!ft_strncmp(cpy->data, COMMENT_CMD_STRING,
+					ft_strlen(COMMENT_CMD_STRING)))
 			write_comment(cpy->data, &head, &size);
+		find_pos_label(cpy->data, &size, label_list);
 		//if ((ret = write(res_open, cpy->data, ft_strlen(cpy->data)) < 0))
 		//	ft_putendl("ca ecrit pas");
 		cpy = cpy->next;

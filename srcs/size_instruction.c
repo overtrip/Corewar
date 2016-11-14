@@ -6,27 +6,73 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 15:44:38 by jealonso          #+#    #+#             */
-/*   Updated: 2016/11/02 14:50:06 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/11/14 17:18:58 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
 /*
-**	Compare word with op.h and return the size of string
+**	Create a new elem who containt position in program and name to find
 */
 
-static int	parse_with_size(char *data, unsigned int *size_in_bit)
+t_order	*create_label(unsigned int *size, char *data, char *find)
 {
-	return (0);
+	t_order	*new;
+
+	new = NULL;
+	if (!(new = (t_order *)malloc(sizeof(t_order))))
+		return (NULL);
+	new->pos = *size;
+	new->label = ft_strndup(data, find - data);
+	return (new);
+	new->next = NULL;
 }
 
 /*
-**	TODO
+**	Push back the new elem
 */
 
-int			size_instruction(char *data, unsigned int *size_in_bit)
+void	push_label(t_order *pos, t_order *new)
 {
-	parse_with_size(data, size_in_bit);
-	return (0);
+	t_order	*tmp;
+
+	tmp = pos;
+	if (!pos)
+		pos = new;
+	while (tmp)
+		tmp = tmp->next;
+	tmp->next = new;
+}
+
+/*
+**	Find if line is a label or instruction
+*/
+
+void	find_pos_label(char *data, unsigned int *size, t_order *pos)
+{
+	char	*find;
+	char	*tmp;
+	int		i;
+	t_order	*new;
+
+	i = 0;
+	tmp = data;
+	if ((find = ft_strchr(data, ':')))
+	{
+		while (tmp != find)
+		{
+			if (!ft_strchr(LABEL_CHARS, *tmp))
+				break ;
+			++tmp;
+		}
+		if (!(++tmp))
+		{
+			ft_putendl("ici");
+			new = create_label(size, data, find);
+			push_label(pos, new);
+		}
+		else
+			return ;
+	}
 }

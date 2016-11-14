@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 15:13:40 by jealonso          #+#    #+#             */
-/*   Updated: 2016/11/09 14:35:39 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/11/14 17:26:54 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,35 +43,49 @@
 **	Define a strusture who contain all error massage
 */
 
-typedef struct		s_mess
+typedef struct			s_mess
 {
-	char			*key_word;
-	char			*message;
-}					t_mess;
+	char				*key_word;
+	char				*message;
+}						t_mess;
 
-typedef struct		s_order
+typedef struct			s_order
 {
-	int				pos;
-	char			*label;
-}					t_order;
+	int					pos;
+	char				*label;
+	struct s_order		*next;
+}						t_order;
 
-int					print_message(int i);
-int					print_message_line(int i, int line);
-int					send_id(char *str, int line);
-int					error_read(t_head *files);
-int					check_content(t_lst *champ, char *file_name);
-int					find_prerequis(char *data, unsigned char *flag, int line);
-void				open_new_file(t_lst *data, char *file_name);
-void				write_name(char *data, header_t *head,
+typedef struct			s_instruct
+{
+	char				op_code;
+	int					arg_type[3];
+	int					arg_value[3];
+	struct s_instruct	*next;
+}						t_instruct;
+
+int						print_message(int i);
+int						print_message_line(int i, int line);
+int						send_id(char *str, int line);
+int						error_read(t_head *files);
+int						check_content(t_lst *champ, char *file_name);
+int						find_prerequis(char *data, unsigned char *flag,
+		int line);
+void					open_new_file(t_lst *data, char *file_name);
+void					write_name(char *data, t_header *head,
 		unsigned int *size);
-void				write_comment(char *data, header_t *head,
+void					write_comment(char *data, t_header *head,
 		unsigned int *size);
+void					find_pos_label(char *data, unsigned int *size,
+		t_order *pos);
+char					*ft_strsep(char **str, const char *delim);
+void					print_header(t_header head, int res_open);
 
 /*
 **	Use to debuging in debug.c
 */
 
-void				print_champ_data(t_head *champ);
-void				print_content(char **tab);
+void					print_champ_data(t_head *champ);
+void					print_content(char **tab);
 
 #endif
