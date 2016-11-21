@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 14:31:12 by jealonso          #+#    #+#             */
-/*   Updated: 2016/11/02 15:44:26 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/11/18 19:26:38 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 **	Check if  instructions are valid
 */
 
-int	find_instruction(char *data, unsigned char *flag, int line)
+int	find_instruction(char *data, unsigned char *flag, int line, t_head **head)
 {
-	(void)data;
-	(void)line;
-	(void)*flag;
+	if (find_label(cpy->data, &flag, line))
+		fill_pos_label();
+
 	return (0);
 }
 
@@ -60,6 +60,7 @@ int	check_content(t_lst *champ, char *file_name)
 	t_lst			*cpy;
 	unsigned char	flag;
 	int				line;
+	t_head			*head;
 
 	cpy = champ;
 	flag = 0;
@@ -69,10 +70,8 @@ int	check_content(t_lst *champ, char *file_name)
 		++line;
 		if (find_prerequis(cpy->data, &flag, line))
 			return (1);
-		if (find_label(cpy->data, &flag, line))
+		if (find_instruction(cpy->data, &flag, line, &head))
 			return (1);
-/*		if (find_instruction(cpy->data, &flag, line))
-			return (1);*/
 		cpy = cpy->next;
 	}
 	open_new_file(champ, file_name);

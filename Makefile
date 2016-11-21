@@ -6,7 +6,7 @@
 #    By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/25 15:08:49 by jealonso          #+#    #+#              #
-#    Updated: 2016/11/10 17:47:00 by jealonso         ###   ########.fr        #
+#    Updated: 2016/11/17 15:14:58 by jealonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,14 +44,14 @@ NAME 		= corewar
 #SRCRS:
 SRCS 		= \
 			check_content.c \
-			convers_to_hexa.c \
+			create_file_cor.c \
+			debug.c \
 			find_prerequis.c \
 			main.c \
 			message.c \
 			op.c \
-			debug.c \
-			write_name.c \
-			size_instruction.c
+			size_instruction.c \
+			write_header.c
 
 #OBJ:
 OBJS = $(patsubst %.c, $(OBJSPATH)/%.o, $(SRCS))

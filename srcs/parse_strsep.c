@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 13:55:43 by jealonso          #+#    #+#             */
-/*   Updated: 2016/11/14 16:57:52 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/11/21 13:33:46 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static int	ft_compare(char c, const char *str)
 {
-	const char	*tmp;
+	char	*tmp;
 
-	tmp = str;
-	while (tmp)
+	tmp = (char *)str;
+	while (*tmp)
 	{
 		if (*tmp == c)
 			return (1);
@@ -26,6 +26,10 @@ static int	ft_compare(char c, const char *str)
 	return (0);
 }
 
+/*
+**	Return ocurence finding, replace the separator char by a '\0'
+*/
+
 char		*ft_strsep(char **str, const char *delim)
 {
 	char	*token;
@@ -33,14 +37,14 @@ char		*ft_strsep(char **str, const char *delim)
 
 	token = *str;
 	begin = token;
-	if (!token)
+	if (!*token)
 		return (NULL);
-	while (token && !ft_compare(*token, delim))
+	while (*token && !ft_compare(*token, delim))
 		++token;
-	if (!token)
-		*str = token;
-	**str = token - *str;
-	*(*str) = '\0';
-	++*str;
+	if (!*token)
+		return (*str);
+	*str = token;
+	**str = '\0';
+	++(*str);
 	return (begin);
 }
