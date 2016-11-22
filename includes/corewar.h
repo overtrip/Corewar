@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 15:13:40 by jealonso          #+#    #+#             */
-/*   Updated: 2016/11/14 17:26:54 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/11/22 13:56:58 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct			s_mess
 
 typedef struct			s_order
 {
-	int					pos;
+	unsigned int		pos;
 	char				*label;
 	struct s_order		*next;
 }						t_order;
@@ -76,8 +76,8 @@ void					write_name(char *data, t_header *head,
 		unsigned int *size);
 void					write_comment(char *data, t_header *head,
 		unsigned int *size);
-void					find_pos_label(char *data, unsigned int *size,
-		t_order *pos);
+void					find_pos_label(char **data, unsigned int *size,
+		t_order **pos);
 char					*ft_strsep(char **str, const char *delim);
 void					print_header(t_header head, int res_open);
 

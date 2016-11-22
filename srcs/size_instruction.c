@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 15:44:38 by jealonso          #+#    #+#             */
-/*   Updated: 2016/11/14 17:18:58 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/11/22 13:47:21 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 **	Create a new elem who containt position in program and name to find
 */
 
-t_order	*create_label(unsigned int *size, char *data, char *find)
+t_order	*create_label(unsigned int *size, char *data)
 {
 	t_order	*new;
 
@@ -24,55 +24,63 @@ t_order	*create_label(unsigned int *size, char *data, char *find)
 	if (!(new = (t_order *)malloc(sizeof(t_order))))
 		return (NULL);
 	new->pos = *size;
-	new->label = ft_strndup(data, find - data);
-	return (new);
+	new->label = ft_strdup(data);
 	new->next = NULL;
+	return (new);
 }
 
 /*
 **	Push back the new elem
 */
 
-void	push_label(t_order *pos, t_order *new)
+void	push_label(t_order **pos, t_order *new)
 {
 	t_order	*tmp;
 
-	tmp = pos;
+	tmp = *pos;
 	if (!pos)
-		pos = new;
+		*pos = new;
 	while (tmp)
 		tmp = tmp->next;
 	tmp->next = new;
 }
 
 /*
+**	Check if the string finding is a real label or other
+*/
+
+static char	*check_is_real(char **str)
+{
+	char	*tmp;
+	char	*find;
+
+	tmp = *str;
+	find = ft_strchr(*str, LABEL_CHAR);
+	while (tmp != find)
+	{
+		if (!ft_isalnum(*tmp) && *tmp != '_')
+			return (NULL);
+		++tmp;
+	}
+	return (*str);
+}
+
+/*
 **	Find if line is a label or instruction
 */
 
-void	find_pos_label(char *data, unsigned int *size, t_order *pos)
+void	find_pos_label(char **data, unsigned int *size, t_order **label_pos)
 {
-	char	*find;
-	char	*tmp;
-	int		i;
 	t_order	*new;
+	char	*label;
 
-	i = 0;
-	tmp = data;
-	if ((find = ft_strchr(data, ':')))
+	if (check_is_real(data))
 	{
-		while (tmp != find)
-		{
-			if (!ft_strchr(LABEL_CHARS, *tmp))
-				break ;
-			++tmp;
-		}
-		if (!(++tmp))
-		{
-			ft_putendl("ici");
-			new = create_label(size, data, find);
-			push_label(pos, new);
-		}
-		else
-			return ;
+		label = ft_strsep(data, ":");
+		new = create_label(size, label);
+		push_label(label_pos, new);
 	}
+	else
+		return ;
+
 }
