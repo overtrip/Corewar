@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/09 17:14:13 by jealonso          #+#    #+#             */
-/*   Updated: 2016/10/25 16:42:45 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/11/23 14:18:36 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_lst	*ft_lst_match(t_head *head, void *data, int (*cmp)(void *, void *));
 t_lst	*ft_lst_pop(t_head *head, size_t pos);
 int		ft_lst_foreach(t_head *head, int (*func)(void *));
 int		ft_lst_push_front(t_head *head, t_lst *elem);
-int		ft_lst_push_back(t_head *head, t_lst *elem);
+int		ft_lst_push_back(t_head **head, t_lst *elem);
 int		ft_lst_del_one(t_head *head, int (*cmp)(void *, void *), void *data);
 void	ft_lst_del_match(t_head *head, void *data, int (*cmp)(void *, void *),
 												void (*del)(void *));

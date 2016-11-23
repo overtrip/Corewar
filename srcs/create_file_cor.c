@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 16:09:52 by jealonso          #+#    #+#             */
-/*   Updated: 2016/11/14 17:27:32 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/11/22 17:04:26 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,6 @@ static void		write_instruction(t_lst *champ, int res_open)
 					ft_strlen(COMMENT_CMD_STRING)))
 			write_comment(cpy->data, &head, &size);
 		find_pos_label(cpy->data, &size, label_list);
-		//if ((ret = write(res_open, cpy->data, ft_strlen(cpy->data)) < 0))
-		//	ft_putendl("ca ecrit pas");
 		cpy = cpy->next;
 	}
 	print_header(head, res_open);
@@ -100,12 +98,13 @@ static char		*change_name(char *file_name)
 **	Create, open, call a writen function and close the new file.cor
 */
 
-void			open_new_file(t_lst *champ, char *file_name)
+void			open_new_file(char *file_name, t_head *head, t_order *label_pos)
 {
 	t_lst	*cpy;
 	int		res_open;
 
-	cpy = champ;
+	//TODO Modif that !!
+	cpy = head->data;
 	file_name = change_name(file_name);
 	if ((res_open = open(file_name, O_RDWR | O_CREAT | O_TRUNC, 0755)) < 0)
 		send_id("", 0);

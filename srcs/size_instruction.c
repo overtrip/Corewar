@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 15:44:38 by jealonso          #+#    #+#             */
-/*   Updated: 2016/11/22 13:47:21 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/11/22 14:42:55 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 **	Create a new elem who containt position in program and name to find
 */
 
-t_order	*create_label(unsigned int *size, char *data)
+t_order		*create_label(unsigned int *size, char *data)
 {
 	t_order	*new;
 
@@ -33,7 +33,7 @@ t_order	*create_label(unsigned int *size, char *data)
 **	Push back the new elem
 */
 
-void	push_label(t_order **pos, t_order *new)
+void		push_label(t_order **pos, t_order *new)
 {
 	t_order	*tmp;
 
@@ -69,7 +69,7 @@ static char	*check_is_real(char **str)
 **	Find if line is a label or instruction
 */
 
-void	find_pos_label(char **data, unsigned int *size, t_order **label_pos)
+void		find_pos_label(char **data, unsigned int *size, t_order **label_pos)
 {
 	t_order	*new;
 	char	*label;
@@ -82,5 +82,4 @@ void	find_pos_label(char **data, unsigned int *size, t_order **label_pos)
 	}
 	else
 		return ;
-
 }

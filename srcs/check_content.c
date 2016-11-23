@@ -6,42 +6,72 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 14:31:12 by jealonso          #+#    #+#             */
-/*   Updated: 2016/11/22 13:56:38 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/11/23 16:07:58 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
 /*
+**	Search in op.c the corespondence
+*/
+
+int	search_instruction(char *str, int line)
+{
+	int			i;
+	extern t_op	g_op_tab[17];
+	i = 0;
+	while (g_op_tab[i].name)
+	{
+		if (!ft_strcmp(str, g_op_tab[i].name))
+			return (i);
+		++i;
+	}
+	send_id("token", line);
+	ft_putendl(str);
+	return (0);
+}
+
+/*
+**	filing struct with elements
+*/
+
+void	fill_instruction(t_head **head, int i, char *str)
+{
+
+	t_instruct	*tmp;
+	int			value;
+
+	tmp = (t_instruct *)(*head)->last->data;
+	value = define_type(str);
+	tmp->arg_type[i] = value;
+}
+
+/*
 **	Check if  instructions are valide
 */
 
-int	find_instruction(char *data, unsigned char *flag, int line, t_head **head)
+int	find_instruction(char **data, unsigned char *flag, int line, t_head **head)
 {
-	return (0);
-}
+	char		*new;
+	int			index;
+	int			i;
+	extern t_op	g_op_tab[17];
 
-/*
-**	Check flags when detect FLAG_LABEL but other missing
-*/
-
-int	check_flag_order(unsigned char *flag, int line)
-{
-	if (!FLAG_C(*flag))
-		return (send_id("no_name", line));
-	if (!FLAG_N(*flag))
-		return (send_id("no_comment", line));
-	return (0);
-}
-
-/*
-**	Find all label and links between them
-*/
-
-int	find_label(char *data, unsigned char *flag, int line, t_head *head)
-{
-	if (*flag & FLAG_LABEL && !(FLAG_C(*flag) && FLAG_N(*flag)))
-		return (check_flag_order(flag, line));
+	(void)flag;
+	i = 0;
+	while (!(new = ft_strsep(data, " ")))
+			;
+	new = ft_strtrim(new);
+	if ((index = search_instruction(new, line)))
+	{
+		create_instruction(head, index);
+		while (i < g_op_tab[index].nb_arg)
+		{
+			fill_instruction(head, i, ft_strsep(data, ","));
+			++i;
+		}
+	}
 	return (0);
 }
 
@@ -52,27 +82,25 @@ int	find_label(char *data, unsigned char *flag, int line, t_head *head)
 int	check_content(t_lst *champ, char *file_name)
 {
 	t_lst			*cpy;
-	unsigned char	flag;
-	int				line;
-	unsigned int	pos;
+	t_posandflag	var;
 	t_head			*head;
 	t_order			*label_pos;
 
 	cpy = champ;
-	flag = 0;
-	line = 0;
-	pos = COMMENT_LENGTH + PROG_NAME_LENGTH + 4;
+	ft_bzero(&var, sizeof(t_posandflag));
+	var.pos = COMMENT_LENGTH + PROG_NAME_LENGTH + 4;
+	var.flag = 0;
 	while (cpy)
 	{
-		++line;
-		if (find_prerequis(cpy->data, &flag, line))
+		++var.line;
+		if (find_prerequis(cpy->data, &var.flag, var.line))
 			return (1);
-		if (find_label(cpy->data, &flag, line, head))
-			find_pos_label(cpy->data, &pos, &label_pos);
-		if (find_instruction(cpy->data, &flag, line, &head))
+		if (find_label(&var.flag, var.line))
+			find_pos_label(cpy->data, &var.pos, &label_pos);
+		if (find_instruction(cpy->data, &var.flag, var.line, &head))
 			return (1);
 		cpy = cpy->next;
 	}
-	open_new_file(champ, file_name);
+	open_new_file(file_name, head, label_pos);
 	return (0);
 }

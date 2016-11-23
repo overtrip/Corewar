@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 15:27:21 by jealonso          #+#    #+#             */
-/*   Updated: 2016/11/14 17:26:21 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/11/22 14:43:33 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 **	Print header file.cor
 */
 
-void			print_header(t_header head, int res_open)
+void	print_header(t_header head, int res_open)
 {
 	write(res_open, &head.magic, 4);
 	write(res_open, &head.prog_name, PROG_NAME_LENGTH + 4);
