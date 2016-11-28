@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 14:31:12 by jealonso          #+#    #+#             */
-/*   Updated: 2016/11/23 16:07:58 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/11/28 17:50:27 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ void	fill_instruction(t_head **head, int i, char *str)
 {
 
 	t_instruct	*tmp;
-	int			value;
+	char		value;
 
 	tmp = (t_instruct *)(*head)->last->data;
 	value = define_type(str);
-	tmp->arg_type[i] = value;
+	*tmp->arg_type[i] = value;
 }
 
 /*
@@ -60,8 +60,10 @@ int	find_instruction(char **data, unsigned char *flag, int line, t_head **head)
 
 	(void)flag;
 	i = 0;
+	printf("ici\n");
 	while (!(new = ft_strsep(data, " ")))
 			;
+	printf("[%s]\n", new);
 	new = ft_strtrim(new);
 	if ((index = search_instruction(new, line)))
 	{
@@ -87,6 +89,8 @@ int	check_content(t_lst *champ, char *file_name)
 	t_order			*label_pos;
 
 	cpy = champ;
+	head = NULL;
+	(void)file_name;
 	ft_bzero(&var, sizeof(t_posandflag));
 	var.pos = COMMENT_LENGTH + PROG_NAME_LENGTH + 4;
 	var.flag = 0;
@@ -95,12 +99,16 @@ int	check_content(t_lst *champ, char *file_name)
 		++var.line;
 		if (find_prerequis(cpy->data, &var.flag, var.line))
 			return (1);
-		if (find_label(&var.flag, var.line))
+		if (!find_label(&var.flag, var.line))
+		{
+			printf("--[%s] [%d]--\n", cpy->data, var.pos);
 			find_pos_label(cpy->data, &var.pos, &label_pos);
+		}
 		if (find_instruction(cpy->data, &var.flag, var.line, &head))
 			return (1);
 		cpy = cpy->next;
 	}
-	open_new_file(file_name, head, label_pos);
+	printf("ici [%d]\n",head->first == NULL);
+//	open_new_file(file_name, head, label_pos);
 	return (0);
 }

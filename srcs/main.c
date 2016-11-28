@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/29 17:22:15 by jealonso          #+#    #+#             */
-/*   Updated: 2016/10/31 15:17:06 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/11/28 17:43:49 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	get_line(t_head *champ, char *buff, int line)
 	ft_strdel(&buff);
 	if (!(new_line = ft_lst_create_no_malloc(tmp_buff)))
 		return (send_id("no_malloc_link", line));
-	if (!ft_lst_push_back(champ, new_line))
+	if (!ft_lst_push_back(&champ, new_line))
 		return (send_id("no_malloc_link", line));
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/09 17:14:13 by jealonso          #+#    #+#             */
-/*   Updated: 2016/11/23 14:18:36 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/11/28 13:39:48 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int		ft_isalpha(int c);
 int		ft_isascii(int c);
 int		ft_isdigit(int c);
 int		ft_islower(int c);
+int		ft_isnumber(char *str);
 int		ft_isprint(int c);
 int		ft_isupper(int c);
 char	*ft_itoa(int n);

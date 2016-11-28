@@ -6,7 +6,7 @@
 #    By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/25 15:08:49 by jealonso          #+#    #+#              #
-#    Updated: 2016/11/17 15:14:58 by jealonso         ###   ########.fr        #
+#    Updated: 2016/11/28 14:11:38 by jealonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,12 +44,17 @@ NAME 		= corewar
 #SRCRS:
 SRCS 		= \
 			check_content.c \
+			check_flags.c \
 			create_file_cor.c \
+			create_instruction.c \
 			debug.c \
+			define_types.c \
 			find_prerequis.c \
 			main.c \
 			message.c \
 			op.c \
+			operation_1_to_5.c \
+			parse_strsep.c \
 			size_instruction.c \
 			write_header.c
 

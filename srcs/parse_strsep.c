@@ -6,11 +6,15 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 13:55:43 by jealonso          #+#    #+#             */
-/*   Updated: 2016/11/21 18:10:10 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/11/28 16:51:23 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+
+/*
+**	compare the current char with reference separator char
+*/
 
 static int	ft_compare(char c, const char *str)
 {
@@ -37,13 +41,13 @@ char		*ft_strsep(char **str, const char *delim)
 
 	token = *str;
 	begin = token;
-	if (!*token)
+	if (!**str)
 		return (NULL);
 	while (*token && !ft_compare(*token, delim))
 		++token;
-	if (!*token)
-		return (*str);
 	*str = token;
+	if (!*token)
+		return (begin);
 	**str = '\0';
 	++(*str);
 	return (begin);

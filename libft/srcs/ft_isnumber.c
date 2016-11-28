@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lst_match.c                                     :+:      :+:    :+:   */
+/*   ft_isnumber.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/30 14:28:59 by jealonso          #+#    #+#             */
-/*   Updated: 2016/11/28 13:41:43 by jealonso         ###   ########.fr       */
+/*   Created: 2016/11/28 13:36:29 by jealonso          #+#    #+#             */
+/*   Updated: 2016/11/28 13:42:18 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_lst	*ft_lst_match(t_head *head, void *data, int (*cmp)(void *, void *))
+int	ft_isnumber(char *str)
 {
-	t_head	*tmp;
-	t_head	*new_head;
-
-	tmp = head;
-	new_head = head;
-	while (tmp)
+	if (!*str)
+		return (0);
+	while (*str)
 	{
-		if ((*cmp)(tmp->first->data, data))
-			ft_lst_push_back(&new_head, ft_lst_create_no_malloc(data));
-		tmp->first = tmp->first->next;
+		if (!ft_isdigit(*str))
+			return (0);
+		++str;
 	}
-	return (new_head->first);
+	return (1);
 }

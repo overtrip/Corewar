@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 15:13:40 by jealonso          #+#    #+#             */
-/*   Updated: 2016/11/23 14:56:11 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/11/28 15:22:45 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ char					*ft_strsep(char **str, const char *delim);
 void					print_header(t_header head, int res_open);
 void					create_instruction(t_head **head, int index);
 int						find_label(unsigned char *flag, int line);
+char					define_type(char *str);
 
 /*
 **	Use to debuging in debug.c

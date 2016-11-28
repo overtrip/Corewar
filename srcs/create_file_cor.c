@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 16:09:52 by jealonso          #+#    #+#             */
-/*   Updated: 2016/11/22 17:04:26 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/11/28 17:46:37 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void		write_instruction(t_lst *champ, int res_open)
 		if (!ft_strncmp(cpy->data, COMMENT_CMD_STRING,
 					ft_strlen(COMMENT_CMD_STRING)))
 			write_comment(cpy->data, &head, &size);
-		find_pos_label(cpy->data, &size, label_list);
+		find_pos_label(cpy->data, &size, &label_list);
 		cpy = cpy->next;
 	}
 	print_header(head, res_open);
@@ -100,15 +100,14 @@ static char		*change_name(char *file_name)
 
 void			open_new_file(char *file_name, t_head *head, t_order *label_pos)
 {
-	t_lst	*cpy;
 	int		res_open;
 
 	//TODO Modif that !!
-	cpy = head->data;
+	(void)label_pos;
 	file_name = change_name(file_name);
 	if ((res_open = open(file_name, O_RDWR | O_CREAT | O_TRUNC, 0755)) < 0)
 		send_id("", 0);
-	write_instruction(champ, res_open);
+	write_instruction(head->first, res_open);
 	if (close(res_open) < 0)
 		return ;
 	free(file_name);

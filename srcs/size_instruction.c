@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 15:44:38 by jealonso          #+#    #+#             */
-/*   Updated: 2016/11/22 14:42:55 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/11/28 17:51:28 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void		find_pos_label(char **data, unsigned int *size, t_order **label_pos)
 	t_order	*new;
 	char	*label;
 
+	printf("[%s]\n", *data);
 	if (check_is_real(data))
 	{
 		label = ft_strsep(data, ":");
