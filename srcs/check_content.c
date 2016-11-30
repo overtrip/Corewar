@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 14:31:12 by jealonso          #+#    #+#             */
-/*   Updated: 2016/11/28 17:50:27 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/11/30 17:35:54 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,11 @@ int	check_content(t_lst *champ, char *file_name)
 	t_lst			*cpy;
 	t_posandflag	var;
 	t_head			*head;
-	t_order			*label_pos;
+	t_head			label_pos;
 
 	cpy = champ;
 	head = NULL;
+	ft_bzero(&label_pos, sizeof(t_head ));
 	(void)file_name;
 	ft_bzero(&var, sizeof(t_posandflag));
 	var.pos = COMMENT_LENGTH + PROG_NAME_LENGTH + 4;
@@ -101,11 +102,11 @@ int	check_content(t_lst *champ, char *file_name)
 			return (1);
 		if (!find_label(&var.flag, var.line))
 		{
-			printf("--[%s] [%d]--\n", cpy->data, var.pos);
-			find_pos_label(cpy->data, &var.pos, &label_pos);
+//			printf("--[%s] [%d] [%p]--\n", cpy->data, var.pos, cpy->data);
+			find_pos_label(&cpy->data, &var.pos, &label_pos);
 		}
-		if (find_instruction(cpy->data, &var.flag, var.line, &head))
-			return (1);
+//		if (find_instruction(cpy->data, &var.flag, var.line, &head))
+//			return (1);
 		cpy = cpy->next;
 	}
 	printf("ici [%d]\n",head->first == NULL);

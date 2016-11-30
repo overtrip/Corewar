@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 16:09:52 by jealonso          #+#    #+#             */
-/*   Updated: 2016/11/28 17:46:37 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/11/30 16:31:33 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void		write_instruction(t_lst *champ, int res_open)
 	t_header		head;
 	int				line;
 	unsigned int	size;
-	t_order			*label_list;
+	t_head			*label_list;
 
 	cpy = champ;
 	line = 0;
@@ -65,7 +65,7 @@ static void		write_instruction(t_lst *champ, int res_open)
 		if (!ft_strncmp(cpy->data, COMMENT_CMD_STRING,
 					ft_strlen(COMMENT_CMD_STRING)))
 			write_comment(cpy->data, &head, &size);
-		find_pos_label(cpy->data, &size, &label_list);
+		find_pos_label(cpy->data, &size, label_list);
 		cpy = cpy->next;
 	}
 	print_header(head, res_open);

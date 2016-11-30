@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 15:44:38 by jealonso          #+#    #+#             */
-/*   Updated: 2016/11/28 17:51:28 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/11/30 17:41:00 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@
 **	Create a new elem who containt position in program and name to find
 */
 
-t_order		*create_label(unsigned int *size, char *data)
+t_lst		*create_label(unsigned int *size, char *data)
 {
 	t_order	*new;
+	t_lst	*ret;
 
 	new = NULL;
 	if (!(new = (t_order *)malloc(sizeof(t_order))))
@@ -26,23 +27,15 @@ t_order		*create_label(unsigned int *size, char *data)
 	new->pos = *size;
 	new->label = ft_strdup(data);
 	new->next = NULL;
-	return (new);
-}
-
-/*
-**	Push back the new elem
-*/
-
-void		push_label(t_order **pos, t_order *new)
-{
-	t_order	*tmp;
-
-	tmp = *pos;
-	if (!pos)
-		*pos = new;
-	while (tmp)
-		tmp = tmp->next;
-	tmp->next = new;
+	if ((ret = ft_lst_create_no_malloc(new)))
+		return (ret);
+	else
+	{
+		free(new->label);
+		free(new);
+		free(ret);
+	}
+	return (NULL);
 }
 
 /*
@@ -69,17 +62,19 @@ static char	*check_is_real(char **str)
 **	Find if line is a label or instruction
 */
 
-void		find_pos_label(char **data, unsigned int *size, t_order **label_pos)
+void		find_pos_label(void **cast, unsigned int *size, t_head *label_pos)
 {
-	t_order	*new;
+	t_lst	*new;
 	char	*label;
+	char	**data;
 
-	printf("[%s]\n", *data);
+	data = (char **)cast;
 	if (check_is_real(data))
 	{
 		label = ft_strsep(data, ":");
 		new = create_label(size, label);
-		push_label(label_pos, new);
+		ft_lst_push_back(&label_pos, new);
+		print_label(label_pos);
 	}
 	else
 		return ;

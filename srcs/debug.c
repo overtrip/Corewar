@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 16:03:39 by jealonso          #+#    #+#             */
-/*   Updated: 2016/10/25 16:29:45 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/11/30 17:40:27 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,17 @@ void	print_content(char **tab)
 	{
 		ft_putendl(tab[i]);
 		++i;
+	}
+}
+
+void	print_label(t_head *head)
+{
+	t_lst *current;
+
+	current = head->first;
+	while (current)
+	{
+		ft_putendl(((t_order *)current->data)->label);
+		current = current->next;
 	}
 }
