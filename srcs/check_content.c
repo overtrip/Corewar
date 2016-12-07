@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 14:31:12 by jealonso          #+#    #+#             */
-/*   Updated: 2016/12/07 15:36:55 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/12/07 19:23:20 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,29 @@ int	find_instruction(char **data, unsigned char *flag, int line, t_head **head)
 }
 
 /*
+**	TODO
+*/
+
+void	delete_label(t_lst *elem)
+{
+	t_lst	*save;
+	t_lst	*current;
+
+	if (!elem)
+		return ;
+	current = elem;
+	while (current)
+	{
+		save = current;
+		current = current->next;
+		if (((t_order *)(save->data))->label)
+			free(((t_order *)(save->data))->label);
+		free(save->data);
+		free(save);
+	}
+}
+
+/*
 **	Launching tests to look the structure construction
 */
 
@@ -106,6 +129,7 @@ int	check_content(t_lst *champ, char *file_name)
 //			return (1);
 		cpy = cpy->next;
 	}
+	delete_label(label_pos.first);
 	printf("fin\n");
 //	open_new_file(file_name, head, label_pos);
 	return (0);
