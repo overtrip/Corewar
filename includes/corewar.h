@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 15:13:40 by jealonso          #+#    #+#             */
-/*   Updated: 2016/12/05 16:48:44 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/11/30 16:31:45 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct			s_order
 {
 	unsigned int		pos;
 	char				*label;
+	struct s_order		*next;
 }						t_order;
 
 typedef struct			s_instruct
