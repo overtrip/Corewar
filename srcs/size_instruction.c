@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 15:44:38 by jealonso          #+#    #+#             */
-/*   Updated: 2016/11/30 17:41:00 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/12/08 14:31:57 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,10 @@ t_lst		*create_label(unsigned int *size, char *data)
 	if (!(new = (t_order *)malloc(sizeof(t_order))))
 		return (NULL);
 	new->pos = *size;
-	new->label = ft_strdup(data);
-	new->next = NULL;
-	if ((ret = ft_lst_create_no_malloc(new)))
-		return (ret);
-	else
-	{
-		free(new->label);
-		free(new);
-		free(ret);
-	}
-	return (NULL);
+	new->label = data;
+	if (!(ret = ft_lst_create_no_malloc(new)))
+		return (NULL);
+	return (ret);
 }
 
 /*
@@ -48,6 +41,8 @@ static char	*check_is_real(char **str)
 	char	*find;
 
 	tmp = *str;
+	if (!*str)
+		return (NULL);
 	find = ft_strchr(*str, LABEL_CHAR);
 	while (tmp != find)
 	{
@@ -71,10 +66,12 @@ void		find_pos_label(void **cast, unsigned int *size, t_head *label_pos)
 	data = (char **)cast;
 	if (check_is_real(data))
 	{
-		label = ft_strsep(data, ":");
-		new = create_label(size, label);
+	//	label = ft_strsep(data, ":");
+	label = ft_strdup("lol");
+		if (!(new = create_label(size, label)))
+			if (label && *label)
+				free(label);
 		ft_lst_push_back(&label_pos, new);
-		print_label(label_pos);
 	}
 	else
 		return ;

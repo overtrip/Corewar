@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/29 17:22:15 by jealonso          #+#    #+#             */
-/*   Updated: 2016/11/28 17:43:49 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/12/08 14:32:55 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,25 @@ static void	init_null(t_head *files, int *line, int *i)
 
 static void	delete_all(t_head *champ, char *buff)
 {
-	ft_lst_del(champ);
+	t_lst	*save;
+	t_lst	*current;
+
 	ft_strdel(&buff);
+	if (champ)
+	{
+		current = champ->first;
+		while (current)
+		{
+			save = current;
+			current = current->next;
+			if ((char *)save->data && save->data)
+				free(save->data);
+			free(save);
+			save = NULL;
+		}
+	champ->first = NULL;
+	champ->last = NULL;
+	}
 }
 
 /*
