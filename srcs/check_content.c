@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 14:31:12 by jealonso          #+#    #+#             */
-/*   Updated: 2016/12/08 15:52:22 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/12/08 17:57:37 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,11 @@
 **	Search in op.c the corespondence
 */
 
-int	search_instruction(char *str, int line)
+static int		search_instruction(char *str, int line)
 {
 	int			i;
 	extern t_op	g_op_tab[17];
+
 	i = 0;
 	while (g_op_tab[i].name)
 	{
@@ -36,9 +37,8 @@ int	search_instruction(char *str, int line)
 **	filing struct with elements
 */
 
-void	fill_instruction(t_head **head, int i, char *str)
+static void		fill_instruction(t_head **head, int i, char *str)
 {
-
 	t_instruct	*tmp;
 	char		value;
 
@@ -51,7 +51,8 @@ void	fill_instruction(t_head **head, int i, char *str)
 **	Check if  instructions are valide
 */
 
-int	find_instruction(char **data, unsigned char *flag, int line, t_head **head)
+int				find_instruction(char **data, unsigned char *flag,
+													int line, t_head **head)
 {
 	char		*new;
 	int			index;
@@ -62,7 +63,7 @@ int	find_instruction(char **data, unsigned char *flag, int line, t_head **head)
 	i = 0;
 	printf("ici\n");
 	while (!(new = ft_strsep(data, " ")))
-			;
+		;
 	printf("[%s]\n", new);
 	new = ft_strtrim(new);
 	if ((index = search_instruction(new, line)))
@@ -78,10 +79,10 @@ int	find_instruction(char **data, unsigned char *flag, int line, t_head **head)
 }
 
 /*
-**	TODO
+**	Delete all label list elements
 */
 
-void	delete_label(t_lst *elem)
+static void		delete_label(t_lst *elem)
 {
 	t_lst	*save;
 	t_lst	*current;
@@ -104,7 +105,7 @@ void	delete_label(t_lst *elem)
 **	Launching tests to look the structure construction
 */
 
-int	check_content(t_lst *champ, char *file_name)
+int				check_content(t_lst *champ, char *file_name)
 {
 	t_lst			*cpy;
 	t_posandflag	var;
@@ -131,6 +132,6 @@ int	check_content(t_lst *champ, char *file_name)
 	}
 	delete_label(label_pos.first);
 	printf("fin\n");
-//	open_new_file(file_name, head, label_pos);
+	open_new_file(file_name, head, &label_pos);
 	return (0);
 }

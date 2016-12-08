@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 13:29:44 by jealonso          #+#    #+#             */
-/*   Updated: 2016/11/28 17:36:15 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/12/08 17:25:40 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	is_label_chars(char c)
 ** Define type of arg
 */
 
-char			define_type(char *str)
+char		define_type(char *str)
 {
 	int		i;
 

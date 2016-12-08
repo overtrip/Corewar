@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 13:55:43 by jealonso          #+#    #+#             */
-/*   Updated: 2016/12/08 17:00:25 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/12/08 17:48:44 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,8 @@ char		*parse_strsep(char **str, const char *delim)
 	if (!*token)
 	{
 		ret = ft_strdup(begin);
-		free(&begin);
-		free(str);
-		return (ret );
+		free(begin);
+		return (ret);
 	}
 	**str = '\0';
 	++(*str);

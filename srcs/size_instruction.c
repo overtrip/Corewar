@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 15:44:38 by jealonso          #+#    #+#             */
-/*   Updated: 2016/12/08 17:06:52 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/12/08 17:56:04 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 **	Create a new elem who containt position in program and name to find
 */
 
-t_lst		*create_label(unsigned int *size, char *data)
+static t_lst	*create_label(unsigned int *size, char *data)
 {
 	t_order	*new;
 	t_lst	*ret;
@@ -35,7 +35,7 @@ t_lst		*create_label(unsigned int *size, char *data)
 **	Check if the string finding is a real label or other
 */
 
-static char	*check_is_real(char **str)
+static char		*check_is_real(char **str)
 {
 	char	*tmp;
 	char	*find;
@@ -57,7 +57,7 @@ static char	*check_is_real(char **str)
 **	Find if line is a label or instruction
 */
 
-void		find_pos_label(void **cast, unsigned int *size, t_head *label_pos)
+void			find_pos_label(void **cast, unsigned int *size, t_head *pos)
 {
 	t_lst	*new;
 	char	*label;
@@ -65,14 +65,15 @@ void		find_pos_label(void **cast, unsigned int *size, t_head *label_pos)
 
 	data = (char **)cast;
 	label = NULL;
+	new = NULL;
 	if (check_is_real(data))
 	{
-		label = parse_strsep(data, ":");
-//	label = ft_strdup("lol");
+//		label = parse_strsep(data, ":");
+	label = ft_strdup("lol");
 		if (!(new = create_label(size, label)))
 			if (label && *label)
 				free(label);
-		ft_lst_push_back(&label_pos, new);
+		ft_lst_push_back(&pos, new);
 	}
 	else
 		return ;

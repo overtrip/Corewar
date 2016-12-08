@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 16:09:52 by jealonso          #+#    #+#             */
-/*   Updated: 2016/11/30 16:31:33 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/12/08 17:57:29 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ static char		*change_name(char *file_name)
 **	Create, open, call a writen function and close the new file.cor
 */
 
-void			open_new_file(char *file_name, t_head *head, t_order *label_pos)
+void			open_new_file(char *file_name, t_head *head, t_head *label_pos)
 {
 	int		res_open;
 

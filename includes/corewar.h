@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 15:13:40 by jealonso          #+#    #+#             */
-/*   Updated: 2016/12/08 16:21:43 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/12/08 17:57:07 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int						check_content(t_lst *champ, char *file_name);
 int						find_prerequis(char *data, unsigned char *flag,
 		int line);
 void					open_new_file(char *file_name, t_head *head,
-		t_order *label_pos);
+		t_head *label_pos);
 void					write_name(char *data, t_header *head,
 		unsigned int *size);
 void					write_comment(char *data, t_header *head,
