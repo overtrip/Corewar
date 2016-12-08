@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 14:31:12 by jealonso          #+#    #+#             */
-/*   Updated: 2016/12/08 14:33:27 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/12/08 15:52:22 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,10 +124,7 @@ int	check_content(t_lst *champ, char *file_name)
 		if (find_prerequis(cpy->data, &var.flag, var.line))
 			return (1);
 		if (!find_label(&var.flag, var.line))
-		{
-//			printf("--[%s] [%d] [%p]--\n", cpy->data, var.pos, cpy->data);
 			find_pos_label(&cpy->data, &var.pos, &label_pos);
-		}
 //		if (find_instruction(cpy->data, &var.flag, var.line, &head))
 //			return (1);
 		cpy = cpy->next;

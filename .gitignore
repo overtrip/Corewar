@@ -2,6 +2,7 @@
 ressource_apprentissage
 ressources
 corewar.dSYM
+objs
 
 #exclude binaries
 corware
@@ -12,3 +13,4 @@ corware
 #exclude script
 *.sh
 *.o
+*.s

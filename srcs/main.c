@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/29 17:22:15 by jealonso          #+#    #+#             */
-/*   Updated: 2016/12/08 14:32:55 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/12/08 17:05:06 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ static void	delete_all(t_head *champ, char *buff)
 {
 	t_lst	*save;
 	t_lst	*current;
+	char	*cast;
 
 	ft_strdel(&buff);
 	if (champ)
@@ -60,8 +61,9 @@ static void	delete_all(t_head *champ, char *buff)
 		{
 			save = current;
 			current = current->next;
-			if ((char *)save->data && save->data)
-				free(save->data);
+			cast = (char *)save->data;
+			if (cast || *cast)
+				free(cast);
 			free(save);
 			save = NULL;
 		}

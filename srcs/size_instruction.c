@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 15:44:38 by jealonso          #+#    #+#             */
-/*   Updated: 2016/12/08 14:31:57 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/12/08 17:06:52 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,11 @@ void		find_pos_label(void **cast, unsigned int *size, t_head *label_pos)
 	char	**data;
 
 	data = (char **)cast;
+	label = NULL;
 	if (check_is_real(data))
 	{
-	//	label = ft_strsep(data, ":");
-	label = ft_strdup("lol");
+		label = parse_strsep(data, ":");
+//	label = ft_strdup("lol");
 		if (!(new = create_label(size, label)))
 			if (label && *label)
 				free(label);

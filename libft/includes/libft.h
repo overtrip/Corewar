@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/09 17:14:13 by jealonso          #+#    #+#             */
-/*   Updated: 2016/11/28 13:39:48 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/12/08 15:49:26 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ int		ft_strnequ(char const *s1, char const *s2, size_t n);
 char	*ft_strnew(size_t size);
 char	*ft_strnstr(const char *s1, const char *s2, size_t n);
 char	*ft_strrchr(const char *s, int c);
+char	*ft_strsep(char **str, const char *delim);
 char	**ft_strsplit(char const *s, char c);
 char	*ft_strstr(char *str, char *to_find);
 char	*ft_strsub(char const *s, unsigned int start, size_t len);

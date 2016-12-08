@@ -6,7 +6,7 @@
 #    By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/09 16:51:42 by jealonso          #+#    #+#              #
-#    Updated: 2016/11/28 13:40:17 by jealonso         ###   ########.fr        #
+#    Updated: 2016/12/08 15:49:56 by jealonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -94,6 +94,7 @@ SRCS = \
 	ft_strnew.c \
 	ft_strnstr.c \
 	ft_strrchr.c \
+	ft_strsep.c \
 	ft_strsplit.c \
 	ft_strstr.c \
 	ft_strsub.c \

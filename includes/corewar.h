@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 15:13:40 by jealonso          #+#    #+#             */
-/*   Updated: 2016/11/30 16:31:45 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/12/08 16:21:43 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void					write_comment(char *data, t_header *head,
 		unsigned int *size);
 void					find_pos_label(void	**data, unsigned int *size,
 		t_head *pos);
-char					*ft_strsep(char **str, const char *delim);
+char					*parse_strsep(char **str, const char *delim);
 void					print_header(t_header head, int res_open);
 void					create_instruction(t_head **head, int index);
 int						find_label(unsigned char *flag, int line);

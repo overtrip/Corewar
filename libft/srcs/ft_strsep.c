@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_strsep.c                                     :+:      :+:    :+:   */
+/*   ft_strsep.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 13:55:43 by jealonso          #+#    #+#             */
-/*   Updated: 2016/12/08 17:00:25 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/12/08 15:48:28 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "libft.h"
 
 /*
 **	compare the current char with reference separator char
@@ -34,11 +34,10 @@ static int	ft_compare(char c, const char *str)
 **	Return ocurence finding, replace the separator char by a '\0'
 */
 
-char		*parse_strsep(char **str, const char *delim)
+char		*ft_strsep(char **str, const char *delim)
 {
 	char	*token;
 	char	*begin;
-	char	*ret;
 
 	token = *str;
 	begin = token;
@@ -48,15 +47,8 @@ char		*parse_strsep(char **str, const char *delim)
 		++token;
 	*str = token;
 	if (!*token)
-	{
-		ret = ft_strdup(begin);
-		free(&begin);
-		free(str);
-		return (ret );
-	}
+		return (begin);
 	**str = '\0';
 	++(*str);
-	ret = ft_strdup(begin);
-	free(begin);
-	return (ret);
+	return (begin);
 }
