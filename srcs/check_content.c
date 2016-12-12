@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 14:31:12 by jealonso          #+#    #+#             */
-/*   Updated: 2016/12/08 17:57:37 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/12/12 14:50:43 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int				find_instruction(char **data, unsigned char *flag,
 	(void)flag;
 	i = 0;
 	printf("ici\n");
-	while (!(new = ft_strsep(data, " ")))
+	while (!(new = parse_strsep(data, " ")))
 		;
 	printf("[%s]\n", new);
 	new = ft_strtrim(new);
@@ -126,12 +126,12 @@ int				check_content(t_lst *champ, char *file_name)
 			return (1);
 		if (!find_label(&var.flag, var.line))
 			find_pos_label(&cpy->data, &var.pos, &label_pos);
-//		if (find_instruction(cpy->data, &var.flag, var.line, &head))
-//			return (1);
+		if (find_instruction(cpy->data, &var.flag, var.line, &head))
+			return (1);
 		cpy = cpy->next;
 	}
 	delete_label(label_pos.first);
 	printf("fin\n");
-	open_new_file(file_name, head, &label_pos);
+//	open_new_file(file_name, head, &label_pos);
 	return (0);
 }
