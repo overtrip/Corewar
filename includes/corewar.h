@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 15:13:40 by jealonso          #+#    #+#             */
-/*   Updated: 2016/12/08 17:57:07 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/12/12 18:02:44 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 # define FLAG_NAME		1
 # define FLAG_COMMENT	2
 # define FLAG_LABEL		4
+# define FLAG_INST		8
 
 /*
 **	Macro for economized lines
@@ -99,7 +100,10 @@ char					*parse_strsep(char **str, const char *delim);
 void					print_header(t_header head, int res_open);
 void					create_instruction(t_head **head, int index);
 int						find_label(unsigned char *flag, int line);
+int						find_flag_inst(unsigned char *flag);
 char					define_type(char *str);
+int						find_instruction(char **data, unsigned char *flag,
+		int line, t_head **head);
 
 /*
 **	Use to debuging in debug.c

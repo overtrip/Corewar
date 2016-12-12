@@ -6,7 +6,7 @@
 #    By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/25 15:08:49 by jealonso          #+#    #+#              #
-#    Updated: 2016/11/28 14:11:38 by jealonso         ###   ########.fr        #
+#    Updated: 2016/12/12 18:03:18 by jealonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,7 @@ SRCS 		= \
 			debug.c \
 			define_types.c \
 			find_prerequis.c \
+			find_instruction.c \
 			main.c \
 			message.c \
 			op.c \

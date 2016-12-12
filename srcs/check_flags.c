@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 14:54:23 by jealonso          #+#    #+#             */
-/*   Updated: 2016/11/28 17:36:11 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/12/12 18:26:26 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,16 @@ int			find_label(unsigned char *flag, int line)
 {
 	if (*flag & FLAG_LABEL && !(FLAG_C(*flag) && FLAG_N(*flag)))
 		return (check_flag_order(flag, line));
+	return (0);
+}
+
+/*
+**	Find if all prerequis is ok and find if instruction flag is set
+*/
+
+int			find_flag_inst(unsigned char *flag)
+{
+	if (*flag & FLAG_INST && (FLAG_C(*flag) && FLAG_N(*flag)))
+		return (1);
 	return (0);
 }
