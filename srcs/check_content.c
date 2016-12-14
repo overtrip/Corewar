@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 14:31:12 by jealonso          #+#    #+#             */
-/*   Updated: 2016/12/12 18:02:49 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/12/14 16:36:11 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ int				check_content(t_lst *champ, char *file_name)
 
 	cpy = champ;
 	head = NULL;
-	ft_bzero(&label_pos, sizeof(t_head ));
 	(void)file_name;
+	ft_bzero(&label_pos, sizeof(t_head));
 	ft_bzero(&var, sizeof(t_posandflag));
 	var.pos = COMMENT_LENGTH + PROG_NAME_LENGTH + 4;
 	var.flag = 0;

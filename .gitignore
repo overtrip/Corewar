@@ -5,7 +5,7 @@ corewar.dSYM
 objs
 
 #exclude binaries
-corware
+corewar
 
 #ignore himself
 .gitignore
@@ -14,3 +14,4 @@ corware
 *.sh
 *.o
 *.s
+*.a

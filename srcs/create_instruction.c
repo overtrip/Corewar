@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 14:50:30 by jealonso          #+#    #+#             */
-/*   Updated: 2016/11/23 14:53:19 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/12/14 13:42:05 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ static void	complet_elem(t_head **head, int index)
 	t_instruct	*tmp;
 	extern t_op	g_op_tab[17];
 
-	tmp = (t_instruct *)(*head)->last->data;
+	tmp = NULL;
+	if ((t_instruct *)(*head)->last->data)
+		tmp = (t_instruct *)(*head)->last->data;
 	tmp->op_code = g_op_tab[index].id;
 }
 

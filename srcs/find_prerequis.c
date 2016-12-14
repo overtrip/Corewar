@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/25 16:03:21 by jealonso          #+#    #+#             */
-/*   Updated: 2016/12/12 18:26:51 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/12/14 14:38:23 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ int			find_prerequis(char *data, unsigned char *flag, int line)
 
 	error = 0;
 	tmp = ft_strtrim(data);
+	if (!(*flag & FLAG_INST) && (FLAG_C(*flag) && FLAG_N(*flag)))
+		*flag |= FLAG_INST;
 	if (*flag & FLAG_LABEL && !(FLAG_C(*flag) || FLAG_N(*flag)))
 		++error;
 	if (name_exist(tmp, flag, line))
@@ -87,10 +89,5 @@ int			find_prerequis(char *data, unsigned char *flag, int line)
 	if (comment_exist(tmp, flag, line))
 		++error;
 	free(tmp);
-	if ((FLAG_C(*flag) && FLAG_N(*flag)))
-	{
-		//printf("%d(FLAG_INST)\n%d(FLAG_COMMENT)\n%d(FLAG_NAME)\n", (*flag & FLAG_INST), *flag & FLAG_COMMENT, *flag & FLAG_NAME);
-		*flag |= FLAG_INST;
-	}
 	return (error);
 }

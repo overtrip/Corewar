@@ -6,9 +6,10 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 18:00:17 by jealonso          #+#    #+#             */
-/*   Updated: 2016/12/12 18:21:05 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/12/14 16:33:37 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "corewar.h"
 
 /*
@@ -28,7 +29,6 @@ static int		search_instruction(char *str, int line)
 		++i;
 	}
 	send_id("token", line);
-	ft_putendl(str);
 	return (0);
 }
 
@@ -36,7 +36,7 @@ static int		search_instruction(char *str, int line)
 **	filing struct with elements
 */
 
-static void		fill_instruction(t_head **head, int i, char *str)
+void			fill_instruction(t_head **head, int i, char *str)
 {
 	t_instruct	*tmp;
 	char		value;
@@ -59,26 +59,24 @@ int				find_instruction(char **data, unsigned char *flag,
 	int			i;
 	extern t_op	g_op_tab[17];
 
-	if (!(*flag & FLAG_INST))
-	{
-		printf("c'est ici\n");
-		return (0);
-	}
 	i = 0;
 	cast = (char *)data;
+	(void)flag;
 	if ((new = parse_strsep(&cast, " ")))
 	{
-	new = ft_strtrim(new);
-	printf("++[%s]++\n", new);
-	if ((index = search_instruction(new, line)))
-	{
-		create_instruction(head, index);
-		while (i < g_op_tab[index].nb_arg)
+		new = ft_strtrim(new);
+		if ((index = search_instruction(new, line)))
 		{
-			fill_instruction(head, i, ft_strsep(data, ","));
-			++i;
+			(void)head;
+			/*create_instruction(head, index);
+			while (i < g_op_tab[index].nb_arg)
+			{
+				fill_instruction(head, i, ft_strsep(data, ","));
+				++i;
+			}*/
 		}
-	}
+	//printf("Instruction: \n\t->[%s]<-\n[%d](index)-[%s](name of index)\n", new, index, g_op_tab[index].name);
+	free(new);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 15:13:40 by jealonso          #+#    #+#             */
-/*   Updated: 2016/12/12 18:02:44 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/12/14 14:08:31 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 # define FLAG_COMMENT	2
 # define FLAG_LABEL		4
 # define FLAG_INST		8
+# define FLAG_AFTER		16
 
 /*
 **	Macro for economized lines
