@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 16:03:39 by jealonso          #+#    #+#             */
-/*   Updated: 2016/12/14 17:33:03 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/12/14 18:31:04 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,33 @@ void	print_label(t_head *head)
 	while (current)
 	{
 		ft_putendl(((t_order *)current->data)->label);
+		current = current->next;
+	}
+}
+
+/*
+**	TODO print all elements of t_instruct
+*/
+
+void	print_instruction(t_head *instruction)
+{
+	t_lst	*current;
+	int		i;
+	int		index;
+	t_instruct	*str;
+	extern t_op g_op_tab[17];
+
+	current = instruction->first;
+	while (current)
+	{
+		str = ((t_instruct *)current->data);
+		i = 0;
+		index = g_op_tab[str->op_code].nb_arg;
+		while (i < index)
+		{
+			//ft_putnbr((*str)->arg_type[i]);
+			++i;
+		}
 		current = current->next;
 	}
 }

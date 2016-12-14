@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 18:00:17 by jealonso          #+#    #+#             */
-/*   Updated: 2016/12/14 16:33:37 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/12/14 18:31:08 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ static int		search_instruction(char *str, int line)
 			return (i);
 		++i;
 	}
-	send_id("token", line);
+	(void)line;
+//	send_id("token", line);
 	return (0);
 }
 
@@ -36,7 +37,7 @@ static int		search_instruction(char *str, int line)
 **	filing struct with elements
 */
 
-void			fill_instruction(t_head **head, int i, char *str)
+void		fill_instruction(t_head **head, int i, char *str)
 {
 	t_instruct	*tmp;
 	char		value;
@@ -61,14 +62,19 @@ int				find_instruction(char **data, unsigned char *flag,
 
 	i = 0;
 	cast = (char *)data;
+	(void)head;
 	(void)flag;
-	if ((new = parse_strsep(&cast, " ")))
+	while ((new = parse_strsep(&cast, " \t")))
+		if ((index = search_instruction(new, line)))
+			break;
+		//printf("[%s]\n", cast);
+	if (new && *new)
 	{
+		printf("[%s]\n", new);
 		new = ft_strtrim(new);
 		if ((index = search_instruction(new, line)))
 		{
-			(void)head;
-			/*create_instruction(head, index);
+		/*	create_instruction(head, index);
 			while (i < g_op_tab[index].nb_arg)
 			{
 				fill_instruction(head, i, ft_strsep(data, ","));
