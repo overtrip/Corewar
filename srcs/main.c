@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/29 17:22:15 by jealonso          #+#    #+#             */
-/*   Updated: 2016/12/14 16:52:33 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/12/14 17:26:48 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ static void	delete_all(t_head *champ, char *buff)
 		{
 			save = current;
 			current = current->next;
-			//if (save->data && (char *)save->data && *(char *)save->data)
-			//printf("[%s](*str)\n[%c](str)\n[%p](0x00...)\n", (char *)save->data, *(char *)save->data, save->data);
 			if ((char *)save->data || *(char *)save->data || save->data)
 				free(save->data);
 			free(save);
