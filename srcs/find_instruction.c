@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 18:00:17 by jealonso          #+#    #+#             */
-/*   Updated: 2016/12/14 18:31:08 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/12/15 15:11:42 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,20 @@ static int		search_instruction(char *str, int line)
 	extern t_op	g_op_tab[17];
 
 	i = 0;
+	if (!(str && *str))
+		return (0);
+//	printf("[%s](%d)-> search_instruction\n", str, line);
 	while (g_op_tab[i].name)
 	{
 		if (!ft_strcmp(str, g_op_tab[i].name))
+		{
+//		printf("[%s]->[%s]\n", str, g_op_tab[i].name);
 			return (i);
+		}
 		++i;
 	}
-	(void)line;
-//	send_id("token", line);
+//	printf("[%s](%d)\n", str, line);
+	send_id("token", line);
 	return (0);
 }
 
@@ -45,6 +51,44 @@ void		fill_instruction(t_head **head, int i, char *str)
 	tmp = (t_instruct *)(*head)->last->data;
 	value = define_type(str);
 	*tmp->arg_type[i] = value;
+}
+
+/*
+** TODO	ft_strchr like, find multiple occurence in string
+*/
+
+int				multichr(char *str, char *to_find)
+{
+	char	*current;
+
+	current = str;
+	while (*current)
+	{
+		if (ft_strchr(to_find, *current))
+			return (1);
+		++current;
+	}
+	return (0);
+}
+
+/*
+**	TODO check if line is empty or comment
+*/
+
+int				go_out(char *str)
+{
+	char	*current;
+
+	if (!str || !*str || (str && *str == '#'))
+		return (1);
+	current = str;
+	while (*current)
+	{
+		if (!ft_strchr(" #;\t", *current))
+			return (0);
+		++current;
+	}
+	return (1);
 }
 
 /*
@@ -64,13 +108,16 @@ int				find_instruction(char **data, unsigned char *flag,
 	cast = (char *)data;
 	(void)head;
 	(void)flag;
+	if (go_out(cast))
+		return (0);
 	while ((new = parse_strsep(&cast, " \t")))
+	{
 		if ((index = search_instruction(new, line)))
 			break;
-		//printf("[%s]\n", cast);
+		free(new);
+	}
 	if (new && *new)
 	{
-		printf("[%s]\n", new);
 		new = ft_strtrim(new);
 		if ((index = search_instruction(new, line)))
 		{
@@ -81,7 +128,6 @@ int				find_instruction(char **data, unsigned char *flag,
 				++i;
 			}*/
 		}
-	//printf("Instruction: \n\t->[%s]<-\n[%d](index)-[%s](name of index)\n", new, index, g_op_tab[index].name);
 	free(new);
 	}
 	return (0);
