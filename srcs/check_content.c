@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 14:31:12 by jealonso          #+#    #+#             */
-/*   Updated: 2016/12/14 18:31:11 by jealonso         ###   ########.fr       */
+/*   Updated: 2017/01/12 15:16:14 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,14 @@ int				check_content(t_lst *champ, char *file_name)
 {
 	t_lst			*cpy;
 	t_posandflag	var;
-	t_head			*head;
+	t_head			head;
 	t_head			label_pos;
 
 	cpy = champ;
-	head = NULL;
+	//head = NULL;
 	(void)file_name;
 	ft_bzero(&label_pos, sizeof(t_head));
+	ft_bzero(&head, sizeof(t_head));
 	ft_bzero(&var, sizeof(t_posandflag));
 	var.pos = COMMENT_LENGTH + PROG_NAME_LENGTH + 4;
 	var.flag = 0;
@@ -61,7 +62,7 @@ int				check_content(t_lst *champ, char *file_name)
 		if (!find_label(&var.flag, var.line))
 			find_pos_label(&cpy->data, &var.pos, &label_pos);
 		if (find_flag_inst(&var.flag))
-			if (find_instruction(cpy->data, &var.flag, var.line, &head))
+			if (find_instruction(&cpy->data, &var.flag, var.line, &head))
 				return (1);
 		cpy = cpy->next;
 	}

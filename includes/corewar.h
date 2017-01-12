@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 15:13:40 by jealonso          #+#    #+#             */
-/*   Updated: 2016/12/14 18:03:15 by jealonso         ###   ########.fr       */
+/*   Updated: 2017/01/12 17:26:40 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ typedef struct			s_order
 typedef struct			s_instruct
 {
 	int					op_code;
-	int					**arg_type;
-	int					**arg_value;
+	int					*arg_type;
+	int					*arg_value;
 	struct s_instruct	*next;
 }						t_instruct;
 
@@ -99,12 +99,12 @@ void					find_pos_label(void	**data, unsigned int *size,
 		t_head *pos);
 char					*parse_strsep(char **str, const char *delim);
 void					print_header(t_header head, int res_open);
-void					create_instruction(t_head **head, int index);
+void					create_instruction(t_head *head, int index);
 int						find_label(unsigned char *flag, int line);
 int						find_flag_inst(unsigned char *flag);
 char					define_type(char *str);
-int						find_instruction(char **data, unsigned char *flag,
-		int line, t_head **head);
+int						find_instruction(void **data, unsigned char *flag,
+		int line, t_head *head);
 
 /*
 **	Use to debuging in debug.c

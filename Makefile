@@ -6,7 +6,7 @@
 #    By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/25 15:08:49 by jealonso          #+#    #+#              #
-#    Updated: 2016/12/12 18:03:18 by jealonso         ###   ########.fr        #
+#    Updated: 2016/12/27 17:39:10 by jealonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,6 @@ SRCS 		= \
 			main.c \
 			message.c \
 			op.c \
-			operation_1_to_5.c \
 			parse_strsep.c \
 			size_instruction.c \
 			write_header.c
