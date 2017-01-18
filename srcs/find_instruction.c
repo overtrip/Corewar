@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 18:00:17 by jealonso          #+#    #+#             */
-/*   Updated: 2017/01/12 18:19:31 by jealonso         ###   ########.fr       */
+/*   Updated: 2017/01/18 16:10:35 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,31 @@ static int		search_instruction(char *str, int line)
 }
 
 /*
+**	Cut comment and trim string
+*/
+
+char	*cut_comment(char *str)
+{
+	char	*delete;
+	char	*cut;
+	char	*tmp;
+
+	delete = NULL;
+	cut = NULL;
+	tmp = NULL;
+	if ((delete = ft_strrchr(str, ';')) || (delete = ft_strrchr(str, '#')))
+	{
+		tmp = ft_strsub(str, 0, delete - str);
+		cut = ft_strtrim(tmp);
+		free(tmp);
+		return (cut);
+	}
+	cut = ft_strtrim(str);
+	free(cut);
+	return (cut);
+}
+
+/*
 **	filing struct with elements
 */
 
@@ -51,13 +76,11 @@ void		fill_instruction(t_head *head, int i, char *str)
 	char		*cut;
 	char		*func;
 
+	func = NULL;
 	tmp = (t_instruct *)head->last->data;
-	cut = ft_strtrim(str);
-	if (strchr(cut, ' '))
-	{
-	func = parse_strsep(&cut, " ");
-	}
-	value = define_type(str);
+	cut = cut_comment(str);
+	value = define_type(cut);
+	printf("\e[1;34m4 - [%s] [%d]\e[0m\n", cut, (int)value);
 	tmp->arg_type[i] = value;
 }
 
@@ -99,7 +122,7 @@ int				find_instruction(void **data, unsigned char *flag,
 		if ((index = search_instruction(new, line)))
 		{
 			i = -1;
-			create_instruction(head, index);
+			create_instruction(head, index, cast);
 			while (++i < g_op_tab[index].nb_arg)
 			{
 				new = parse_strsep(cast, ",");

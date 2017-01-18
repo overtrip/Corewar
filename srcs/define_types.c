@@ -6,27 +6,41 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 13:29:44 by jealonso          #+#    #+#             */
-/*   Updated: 2016/12/27 16:31:10 by jealonso         ###   ########.fr       */
+/*   Updated: 2017/01/18 17:23:50 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
 /*
-** verify a char is in LABEL_CHARS
+**	Check if char is a label_char
 */
 
-static int	is_label_chars(char c)
+static int is_t_lab(char *str)
 {
-	int		i;
-	char	*str;
+	char	*tmp;
+	char	*current;
 
-	i = -1;
-	str = LABEL_CHARS;
-	while (str[++i])
-		if (str[i] == c)
-			return (1);
-	return (0);
+	tmp = LABEL_CHARS;
+	current = str;
+	if (!*str)
+		return (0);
+	while (*current)
+	{
+		if (!ft_strchr(tmp, *current))
+			return (0);
+		++current;
+	}
+	return (1);
+}
+
+/*
+**	TODO check if the string was a T_REG
+*/
+
+static int is_t_reg(char *str)
+{
+	(void);
 }
 
 /*
@@ -44,12 +58,9 @@ char		define_type(char *str)
 		return (T_DIR);
 	else if (str[0] == 'r' && ft_atoi(str++) <= REG_NUMBER)
 		return (T_REG);
-	while (str[++i] && ft_isdigit(str[i]))
-		if (!str[i + 1])
-			return (T_IND);
-	i = -1;
-	while (str[++i] && is_label_chars(str[i]))
-		if (!str[i + 1])
-			return (T_LAB);
+	if (*str && ft_isnumber(str))
+		return (T_IND);
+	if (is_t_lab(str))
+		return (T_LAB);
 	return (0);
 }
