@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 18:00:17 by jealonso          #+#    #+#             */
-/*   Updated: 2017/01/18 16:10:35 by jealonso         ###   ########.fr       */
+/*   Updated: 2017/01/19 16:02:08 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,19 +69,33 @@ char	*cut_comment(char *str)
 **	filing struct with elements
 */
 
-void		fill_instruction(t_head *head, int i, char *str)
+void		fill_type_instruction(t_head *head, int i, char *str)
 {
 	t_instruct	*tmp;
-	char		value;
+	char		type;
 	char		*cut;
 	char		*func;
 
 	func = NULL;
 	tmp = (t_instruct *)head->last->data;
 	cut = cut_comment(str);
-	value = define_type(cut);
-	printf("\e[1;34m4 - [%s] [%d]\e[0m\n", cut, (int)value);
-	tmp->arg_type[i] = value;
+	type = define_type(cut);
+	printf("\e[1;34m[%s]\e[0m\n", cut);
+	tmp->arg_type[i] = type;
+}
+
+/*
+**	filing struct with elements
+*/
+
+void		fill_value_instruction(t_head *head, int i, char *str)
+{
+	t_instruct	*tmp;
+	char		*cut;
+
+	tmp = (t_instruct *)head->last->data;
+	cut = cut_comment(str);
+	tmp->arg_value[i] = ft_strdup(cut);
 }
 
 /*
@@ -126,7 +140,8 @@ int				find_instruction(void **data, unsigned char *flag,
 			while (++i < g_op_tab[index].nb_arg)
 			{
 				new = parse_strsep(cast, ",");
-				fill_instruction(head, i, new);
+				fill_type_instruction(head, i, new);
+				fill_value_instruction(head, i, new);
 			}
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 13:29:44 by jealonso          #+#    #+#             */
-/*   Updated: 2017/01/18 17:23:50 by jealonso         ###   ########.fr       */
+/*   Updated: 2017/01/19 15:29:30 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,16 @@ static int is_t_lab(char *str)
 **	TODO check if the string was a T_REG
 */
 
-static int is_t_reg(char *str)
+int is_t_reg(char *str)
 {
-	(void);
+	int		count;
+	int		result;
+
+	count = ft_strlen(++str);
+	result = 0;
+	if (ft_isnumber(str))
+		result = ft_atoi(str);
+	return (result);
 }
 
 /*
@@ -54,9 +61,9 @@ char		define_type(char *str)
 	i = -1;
 	if (!str)
 		return (0);
-	if (ft_strchr(str, '%'))
+	if (*str == '%')
 		return (T_DIR);
-	else if (str[0] == 'r' && ft_atoi(str++) <= REG_NUMBER)
+	else if (*str == 'r' && (is_t_reg(str) <= REG_NUMBER))
 		return (T_REG);
 	if (*str && ft_isnumber(str))
 		return (T_IND);

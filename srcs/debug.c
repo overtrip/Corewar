@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 16:03:39 by jealonso          #+#    #+#             */
-/*   Updated: 2016/12/14 18:31:04 by jealonso         ###   ########.fr       */
+/*   Updated: 2017/01/19 17:16:28 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ void	print_instruction(t_head *instruction)
 		index = g_op_tab[str->op_code].nb_arg;
 		while (i < index)
 		{
-			//ft_putnbr((*str)->arg_type[i]);
+			ft_putnbr(str->arg_type[i]);
+			ft_putchar('\n');
 			++i;
 		}
 		current = current->next;

@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 15:13:40 by jealonso          #+#    #+#             */
-/*   Updated: 2017/01/16 17:54:38 by jealonso         ###   ########.fr       */
+/*   Updated: 2017/01/19 17:14:28 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ typedef struct			s_instruct
 {
 	int					op_code;
 	int					*arg_type;
-	int					*arg_value;
+	char				**arg_value;
 	struct s_instruct	*next;
 }						t_instruct;
 
@@ -113,5 +113,6 @@ int						find_instruction(void **data, unsigned char *flag,
 void					print_champ_data(t_head *champ);
 void					print_content(char **tab);
 void					print_label(t_head *label);
+void					print_instruction(t_head *instruction);
 
 #endif

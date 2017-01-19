@@ -6,12 +6,11 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 14:31:12 by jealonso          #+#    #+#             */
-/*   Updated: 2017/01/12 15:16:14 by jealonso         ###   ########.fr       */
+/*   Updated: 2017/01/19 17:14:53 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-
 /*
 **	Delete all label list elements
 */
@@ -20,7 +19,6 @@ static void		delete_label(t_lst *elem)
 {
 	t_lst	*save;
 	t_lst	*current;
-
 	if (!elem)
 		return ;
 	current = elem;
@@ -45,7 +43,6 @@ int				check_content(t_lst *champ, char *file_name)
 	t_posandflag	var;
 	t_head			head;
 	t_head			label_pos;
-
 	cpy = champ;
 	//head = NULL;
 	(void)file_name;
@@ -66,6 +63,7 @@ int				check_content(t_lst *champ, char *file_name)
 				return (1);
 		cpy = cpy->next;
 	}
+	print_instruction(&head);
 	delete_label(label_pos.first);
 	printf("fin\n");
 //	open_new_file(file_name, head, &label_pos);
