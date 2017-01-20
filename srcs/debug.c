@@ -6,17 +6,17 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 16:03:39 by jealonso          #+#    #+#             */
-/*   Updated: 2017/01/19 17:16:28 by jealonso         ###   ########.fr       */
+/*   Updated: 2017/01/20 16:12:58 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "asm.h"
 
 /*
 **	TODO Use to debug
 */
 
-void	print_champ_data(t_head *champ)
+void		print_champ_data(t_head *champ)
 {
 	t_lst	*tmp;
 
@@ -28,7 +28,7 @@ void	print_champ_data(t_head *champ)
 	}
 }
 
-void	print_content(char **tab)
+void		print_content(char **tab)
 {
 	int	i;
 
@@ -40,7 +40,7 @@ void	print_content(char **tab)
 	}
 }
 
-void	print_label(t_head *head)
+void		print_label(t_head *head)
 {
 	t_lst *current;
 
@@ -53,14 +53,38 @@ void	print_label(t_head *head)
 }
 
 /*
-**	TODO print all elements of t_instruct
+**	Print patern to print_instruction function
 */
 
-void	print_instruction(t_head *instruction)
+static void	patern_print(t_instruct *elem, int i, int index)
 {
-	t_lst	*current;
-	int		i;
-	int		index;
+	extern t_op g_op_tab[17];
+
+	index = 0;
+	while (g_op_tab[index].id < elem->op_code)
+		++index;
+	ft_putstr("(op_code)[");
+	ft_putnbr(elem->op_code);
+	ft_putstr("](");
+	ft_putstr(g_op_tab[index].name);
+	ft_putstr(")");
+	ft_putstr("\t(arg_type)[");
+	ft_putnbr(elem->arg_type[i]);
+	ft_putstr("]\t(value)[");
+	ft_putstr(elem->arg_value[i]);
+	ft_putstr("]");
+	ft_putchar('\n');
+}
+
+/*
+**	Print all elements of t_instruct
+*/
+
+void		print_instruction(t_head *instruction)
+{
+	t_lst		*current;
+	int			i;
+	int			index;
 	t_instruct	*str;
 	extern t_op g_op_tab[17];
 
@@ -68,14 +92,13 @@ void	print_instruction(t_head *instruction)
 	while (current)
 	{
 		str = ((t_instruct *)current->data);
-		i = 0;
-		index = g_op_tab[str->op_code].nb_arg;
-		while (i < index)
-		{
-			ft_putnbr(str->arg_type[i]);
-			ft_putchar('\n');
-			++i;
-		}
+		i = -1;
+		index = 0;
+		while (g_op_tab[index].id < str->op_code)
+			++index;
+		index = g_op_tab[index].nb_arg;
+		while (++i < index)
+			patern_print(str, i, index);
 		current = current->next;
 	}
 }

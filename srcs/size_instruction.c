@@ -6,11 +6,11 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 15:44:38 by jealonso          #+#    #+#             */
-/*   Updated: 2016/12/14 17:24:43 by jealonso         ###   ########.fr       */
+/*   Updated: 2017/01/20 18:03:27 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "asm.h"
 
 /*
 **	Create a new elem who containt position in program and name to find
@@ -39,7 +39,6 @@ static char		*check_is_real(char **str)
 {
 	char	*tmp;
 	char	*find;
-
 	tmp = *str;
 	if (!*str)
 		return (NULL);
@@ -66,6 +65,7 @@ void			find_pos_label(void **cast, unsigned int *size, t_head *pos)
 	data = (char **)cast;
 	label = NULL;
 	new = NULL;
+	label = *data;
 	if (check_is_real(data))
 	{
 		label = parse_strsep(data, ":");

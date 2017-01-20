@@ -6,11 +6,11 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 16:09:52 by jealonso          #+#    #+#             */
-/*   Updated: 2016/12/08 17:57:29 by jealonso         ###   ########.fr       */
+/*   Updated: 2017/01/20 16:35:26 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "asm.h"
 
 /*
 **	Swap int to little edian
@@ -82,15 +82,19 @@ static char		*change_name(char *file_name)
 	char	*extenssion;
 
 	final_path = NULL;
+	extenssion = NULL;
 	name = ft_strrchr(file_name, '/');
 	file_name = ft_strndup(file_name, name - file_name);
-	extenssion = ft_strrchr(name, '.');
-	extenssion = ft_strndup(name, extenssion - name);
-	name = ft_strjoin(file_name, extenssion);
-	final_path = ft_strjoin(name, ".cor");
-	free(name);
+	if (name)
+	{
+		extenssion = ft_strrchr(name, '.');
+		extenssion = ft_strndup(name, extenssion - name);
+		name = ft_strjoin(file_name, extenssion);
+		final_path = ft_strjoin(name, ".cor");
+		free(name);
+		free(extenssion);
+	}
 	free(file_name);
-	free(extenssion);
 	return (final_path);
 }
 

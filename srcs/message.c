@@ -6,11 +6,11 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 15:26:20 by jealonso          #+#    #+#             */
-/*   Updated: 2016/11/02 14:52:06 by jealonso         ###   ########.fr       */
+/*   Updated: 2017/01/20 15:17:34 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "asm.h"
 
 /*
 **	Contains all variable message

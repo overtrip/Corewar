@@ -6,11 +6,11 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 18:00:17 by jealonso          #+#    #+#             */
-/*   Updated: 2017/01/19 16:02:08 by jealonso         ###   ########.fr       */
+/*   Updated: 2017/01/20 17:00:22 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "asm.h"
 
 /*
 **	Search in op.c the corespondence
@@ -21,9 +21,8 @@ static int		search_instruction(char *str, int line)
 	int			i;
 	char		*to_find;
 	char		*begin;
-	extern t_op	g_op_tab[17];
+	extern t_op	g_op_tab[SIZE];
 
-	(void)line;
 	i = -1;
 	if (!str || !*str)
 		return (0);
@@ -34,7 +33,7 @@ static int		search_instruction(char *str, int line)
 		if (!ft_strcmp(begin, g_op_tab[i].name))
 		{
 			free(begin);
-				return (i);
+			return (i);
 		}
 	send_id("token", line);
 	return (0);
@@ -44,7 +43,7 @@ static int		search_instruction(char *str, int line)
 **	Cut comment and trim string
 */
 
-char	*cut_comment(char *str)
+static char		*cut_comment(char *str)
 {
 	char	*delete;
 	char	*cut;
@@ -60,8 +59,6 @@ char	*cut_comment(char *str)
 		free(tmp);
 		return (cut);
 	}
-	cut = ft_strtrim(str);
-	free(cut);
 	return (cut);
 }
 
@@ -69,7 +66,7 @@ char	*cut_comment(char *str)
 **	filing struct with elements
 */
 
-void		fill_type_instruction(t_head *head, int i, char *str)
+void			fill_type_instruction(t_head *head, int i, char *str)
 {
 	t_instruct	*tmp;
 	char		type;
@@ -80,22 +77,25 @@ void		fill_type_instruction(t_head *head, int i, char *str)
 	tmp = (t_instruct *)head->last->data;
 	cut = cut_comment(str);
 	type = define_type(cut);
-	printf("\e[1;34m[%s]\e[0m\n", cut);
-	tmp->arg_type[i] = type;
+	free(cut);
+	if (type)
+		tmp->arg_type[i] = type;
 }
 
 /*
 **	filing struct with elements
 */
 
-void		fill_value_instruction(t_head *head, int i, char *str)
+void			fill_value_instruction(t_head *head, int i, char *str)
 {
 	t_instruct	*tmp;
 	char		*cut;
 
+	cut = NULL;
 	tmp = (t_instruct *)head->last->data;
 	cut = cut_comment(str);
-	tmp->arg_value[i] = ft_strdup(cut);
+	if (cut)
+		tmp->arg_value[i] = ft_strdup(cut);
 }
 
 /*
@@ -126,14 +126,15 @@ int				find_instruction(void **data, unsigned char *flag,
 	int			index;
 	int			i;
 	char		**cast;
-	extern t_op	g_op_tab[17];
+	extern t_op	g_op_tab[SIZE];
 
 	(void)flag;
 	cast = (char **)data;
 	new = ft_strtrim(*cast);
 	if (new && *new && !go_out(new))
 	{
-		if ((index = search_instruction(new, line)))
+		index = search_instruction(new, line);
+		if (index > 0 || index < SIZE)
 		{
 			i = -1;
 			create_instruction(head, index, cast);

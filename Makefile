@@ -6,7 +6,7 @@
 #    By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/25 15:08:49 by jealonso          #+#    #+#              #
-#    Updated: 2016/12/27 17:39:10 by jealonso         ###   ########.fr        #
+#    Updated: 2017/01/20 16:51:41 by jealonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ PATHLIB		= -I $(INCPATH) -I $(LFTPATH)/$(INCPATH)
 CFLAGS		= -Wall -Wextra -Werror -g -O0 $(PATHLIB)
 
 #EXECUTALE:
-NAME 		= corewar
+NAME 		= asm
 
 #SRCRS:
 SRCS 		= \
@@ -51,6 +51,7 @@ SRCS 		= \
 			define_types.c \
 			find_prerequis.c \
 			find_instruction.c \
+			free_struct.c \
 			main.c \
 			message.c \
 			op.c \
@@ -63,7 +64,7 @@ OBJS = $(patsubst %.c, $(OBJSPATH)/%.o, $(SRCS))
 
 #HEAD:
 HFILES	= op.h \
-		  corewar.h
+		  asm.h
 HEAD	= $(patsubst %.h, $(INCPATH)/%.h, $(HFILES))
 
 all: $(LIBFT) $(OBJSPATH) $(NAME)

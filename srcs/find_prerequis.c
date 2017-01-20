@@ -6,11 +6,11 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/25 16:03:21 by jealonso          #+#    #+#             */
-/*   Updated: 2016/12/14 14:38:23 by jealonso         ###   ########.fr       */
+/*   Updated: 2017/01/20 15:17:01 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "asm.h"
 
 /*
 **	Compare size of string with flag parametre

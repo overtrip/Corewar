@@ -6,11 +6,11 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 14:54:23 by jealonso          #+#    #+#             */
-/*   Updated: 2016/12/14 14:37:43 by jealonso         ###   ########.fr       */
+/*   Updated: 2017/01/20 15:15:54 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "asm.h"
 
 /*
 **	Check flags when detect FLAG_LABEL but other missing

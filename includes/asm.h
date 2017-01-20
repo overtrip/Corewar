@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 15:13:40 by jealonso          #+#    #+#             */
-/*   Updated: 2017/01/19 17:14:28 by jealonso         ###   ########.fr       */
+/*   Updated: 2017/01/20 17:25:39 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,12 @@
 */
 
 # define INDEX			20
+
+/*
+**	Use to define who much function op_t contain
+*/
+
+# define SIZE			17
 
 /*
 **	Use to find if fiels exist and their formats
@@ -105,6 +111,8 @@ int						find_flag_inst(unsigned char *flag);
 char					define_type(char *str);
 int						find_instruction(void **data, unsigned char *flag,
 		int line, t_head *head);
+void					delete_instruction(t_head *head);
+int						is_t_lab(char *str);
 
 /*
 **	Use to debuging in debug.c

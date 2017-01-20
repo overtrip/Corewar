@@ -6,11 +6,11 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 15:27:21 by jealonso          #+#    #+#             */
-/*   Updated: 2016/11/22 14:43:33 by jealonso         ###   ########.fr       */
+/*   Updated: 2017/01/20 15:18:25 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "asm.h"
 
 /*
 **	Print header file.cor

@@ -6,11 +6,11 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 13:55:43 by jealonso          #+#    #+#             */
-/*   Updated: 2016/12/14 17:42:04 by jealonso         ###   ########.fr       */
+/*   Updated: 2017/01/20 15:17:56 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "asm.h"
 
 /*
 **	compare the current char with reference separator char

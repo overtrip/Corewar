@@ -6,17 +6,17 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 13:29:44 by jealonso          #+#    #+#             */
-/*   Updated: 2017/01/19 15:29:30 by jealonso         ###   ########.fr       */
+/*   Updated: 2017/01/20 17:25:41 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "asm.h"
 
 /*
 **	Check if char is a label_char
 */
 
-static int is_t_lab(char *str)
+int	is_t_lab(char *str)
 {
 	char	*tmp;
 	char	*current;
@@ -38,7 +38,7 @@ static int is_t_lab(char *str)
 **	TODO check if the string was a T_REG
 */
 
-int is_t_reg(char *str)
+static int	is_t_reg(char *str)
 {
 	int		count;
 	int		result;
@@ -56,10 +56,10 @@ int is_t_reg(char *str)
 
 char		define_type(char *str)
 {
-	int		i;
+	int	i;
 
 	i = -1;
-	if (!str)
+	if (!str || !*str)
 		return (0);
 	if (*str == '%')
 		return (T_DIR);
