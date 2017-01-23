@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 15:44:38 by jealonso          #+#    #+#             */
-/*   Updated: 2017/01/20 18:03:27 by jealonso         ###   ########.fr       */
+/*   Updated: 2017/01/23 17:10:10 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,16 @@ static t_lst	*create_label(unsigned int *size, char *data)
 {
 	t_order	*new;
 	t_lst	*ret;
+	char	*trim;
 
 	new = NULL;
+	trim = NULL;
+	if (data && *data)
+		trim = ft_strtrim(data);
 	if (!(new = (t_order *)malloc(sizeof(t_order))))
 		return (NULL);
 	new->pos = *size;
-	new->label = data;
+	new->label = trim;
 	if (!(ret = ft_lst_create_no_malloc(new)))
 		return (NULL);
 	return (ret);
@@ -37,19 +41,28 @@ static t_lst	*create_label(unsigned int *size, char *data)
 
 static char		*check_is_real(char **str)
 {
-	char	*tmp;
 	char	*find;
-	tmp = *str;
-	if (!*str)
+	char	*trim;
+	char	*label;
+	char	*stock;
+
+	stock = *str;
+	if (!(stock || *stock))
 		return (NULL);
-	find = ft_strchr(*str, LABEL_CHAR);
-	while (tmp != find)
+	trim = NULL;
+	if ((find = ft_strchr(stock, LABEL_CHAR)))
 	{
-		if (!ft_isalnum(*tmp) && *tmp != '_')
-			return (NULL);
-		++tmp;
+		label = ft_strndup(stock, find - stock);
+		trim = ft_strtrim(label);
+		free(label);
+		if (is_t_lab(trim))
+		{
+			free(trim);
+			return (*str);
+		}
 	}
-	return (*str);
+	free(trim);
+	return (NULL);
 }
 
 /*
@@ -69,10 +82,9 @@ void			find_pos_label(void **cast, unsigned int *size, t_head *pos)
 	if (check_is_real(data))
 	{
 		label = parse_strsep(data, ":");
-		if (!(new = create_label(size, label)))
-			if (label && *label)
-				free(label);
-		ft_lst_push_back(&pos, new);
+		if ((new = create_label(size, label)))
+			ft_lst_push_back(&pos, new);
+		free(label);
 	}
 	else
 		return ;

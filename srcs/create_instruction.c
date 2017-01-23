@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 14:50:30 by jealonso          #+#    #+#             */
-/*   Updated: 2017/01/20 15:22:11 by jealonso         ###   ########.fr       */
+/*   Updated: 2017/01/23 17:44:31 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 static void	define_op_code_function(t_lst **elem, int index, char **str)
 {
-	extern t_op	g_op_tab[17];
+	extern t_op	g_op_tab[SIZE];
 
 	if ((((t_instruct *)(*elem)->data)->op_code = g_op_tab[index].id))
 	{
@@ -53,7 +53,7 @@ void		create_instruction(t_head *head, int index, char **str)
 {
 	t_lst		*new;
 	t_instruct	*tmp;
-	extern t_op	g_op_tab[17];
+	extern t_op	g_op_tab[SIZE];
 
 	tmp = NULL;
 	if (!(tmp = (t_instruct *)malloc(sizeof(t_instruct))))

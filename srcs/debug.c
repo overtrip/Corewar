@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 16:03:39 by jealonso          #+#    #+#             */
-/*   Updated: 2017/01/20 16:12:58 by jealonso         ###   ########.fr       */
+/*   Updated: 2017/01/23 17:45:16 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void		print_label(t_head *head)
 
 static void	patern_print(t_instruct *elem, int i, int index)
 {
-	extern t_op g_op_tab[17];
+	extern t_op g_op_tab[SIZE];
 
 	index = 0;
 	while (g_op_tab[index].id < elem->op_code)
@@ -86,7 +86,7 @@ void		print_instruction(t_head *instruction)
 	int			i;
 	int			index;
 	t_instruct	*str;
-	extern t_op g_op_tab[17];
+	extern t_op g_op_tab[SIZE];
 
 	current = instruction->first;
 	while (current)

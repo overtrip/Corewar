@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 13:29:44 by jealonso          #+#    #+#             */
-/*   Updated: 2017/01/20 17:25:41 by jealonso         ###   ########.fr       */
+/*   Updated: 2017/01/23 14:56:59 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	is_t_lab(char *str)
 
 	tmp = LABEL_CHARS;
 	current = str;
-	if (!*str)
+	if (!str || !*str)
 		return (0);
 	while (*current)
 	{

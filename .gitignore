@@ -6,6 +6,7 @@ objs
 
 #exclude binaries
 corewar
+asm
 
 #ignore himself
 .gitignore

@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 18:00:17 by jealonso          #+#    #+#             */
-/*   Updated: 2017/01/20 17:00:22 by jealonso         ###   ########.fr       */
+/*   Updated: 2017/01/23 18:11:27 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,12 @@ static char		*cut_comment(char *str)
 	char	*delete;
 	char	*cut;
 	char	*tmp;
+	char	*ret;
 
 	delete = NULL;
 	cut = NULL;
 	tmp = NULL;
+	ret = str;
 	if ((delete = ft_strrchr(str, ';')) || (delete = ft_strrchr(str, '#')))
 	{
 		tmp = ft_strsub(str, 0, delete - str);
@@ -59,7 +61,9 @@ static char		*cut_comment(char *str)
 		free(tmp);
 		return (cut);
 	}
-	return (cut);
+	if (str && *str)
+		ret = ft_strtrim(str);
+	return (ret);
 }
 
 /*
@@ -96,6 +100,7 @@ void			fill_value_instruction(t_head *head, int i, char *str)
 	cut = cut_comment(str);
 	if (cut)
 		tmp->arg_value[i] = ft_strdup(cut);
+	printf("-[%d]-\n", i);
 }
 
 /*
