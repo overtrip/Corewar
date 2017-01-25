@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 16:37:36 by jealonso          #+#    #+#             */
-/*   Updated: 2017/01/23 18:19:57 by jealonso         ###   ########.fr       */
+/*   Updated: 2017/01/25 18:04:35 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,13 @@ void	delete_instruction(t_head *head)
 		save = elem;
 		elem = elem->next;
 		i = -1;
-		size = g_op_tab[DATA->op_code].nb_arg;
-		printf("1-[%d]\n", size);
+		size = g_op_tab[DATA->op_code - 1].nb_arg;
 		while (++i < size)
-		{
-		//	if (DATA->arg_value[i])
-		//	{
-				printf("2-[%d][%s]\n", i, g_op_tab[DATA->op_code].name);
-				free(DATA->arg_value[i]);
-		//	}
-		}
+			free(DATA->arg_value[i]);
 		if (DATA->arg_value)
 			free(DATA->arg_value);
 		if (DATA->arg_type)
 			free(DATA->arg_type);
-		free(&DATA->op_code);
 		free(save);
 	}
 }

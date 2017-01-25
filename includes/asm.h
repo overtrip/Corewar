@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 15:13:40 by jealonso          #+#    #+#             */
-/*   Updated: 2017/01/23 17:32:10 by jealonso         ###   ########.fr       */
+/*   Updated: 2017/01/25 14:31:08 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@
 
 # define FLAG_N(flag)	(flag & FLAG_NAME)
 # define FLAG_C(flag)	(flag & FLAG_COMMENT)
-# define DATA ((t_instruct *)(*elem).data)
+# define DATA ((t_instruct *)(save)->data)
 
 /*
 **	Define a strusture who contain all error massage

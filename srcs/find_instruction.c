@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 18:00:17 by jealonso          #+#    #+#             */
-/*   Updated: 2017/01/23 18:11:27 by jealonso         ###   ########.fr       */
+/*   Updated: 2017/01/25 18:04:06 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int		search_instruction(char *str, int line)
 
 	i = -1;
 	if (!str || !*str)
-		return (0);
+		return (-1);
 	begin = str;
 	to_find = ft_strchr(str, ' ');
 	begin = ft_strndup(str, to_find - begin);
@@ -36,7 +36,7 @@ static int		search_instruction(char *str, int line)
 			return (i);
 		}
 	send_id("token", line);
-	return (0);
+	return (-1);
 }
 
 /*
@@ -100,14 +100,13 @@ void			fill_value_instruction(t_head *head, int i, char *str)
 	cut = cut_comment(str);
 	if (cut)
 		tmp->arg_value[i] = ft_strdup(cut);
-	printf("-[%d]-\n", i);
 }
 
 /*
 **	Check if line is a comment or a label
 */
 
-int				go_out(char *str)
+static int				go_out(char *str)
 {
 	char	*find;
 
@@ -128,29 +127,34 @@ int				find_instruction(void **data, unsigned char *flag,
 													int line, t_head *head)
 {
 	char		*new;
+	char		*substring;
 	int			index;
 	int			i;
 	char		**cast;
+	void		*save;
 	extern t_op	g_op_tab[SIZE];
 
 	(void)flag;
+	save = *data;
 	cast = (char **)data;
 	new = ft_strtrim(*cast);
 	if (new && *new && !go_out(new))
 	{
 		index = search_instruction(new, line);
-		if (index > 0 || index < SIZE)
+		if (index > -1 && index < SIZE)
 		{
 			i = -1;
 			create_instruction(head, index, cast);
 			while (++i < g_op_tab[index].nb_arg)
 			{
-				new = parse_strsep(cast, ",");
-				fill_type_instruction(head, i, new);
-				fill_value_instruction(head, i, new);
+				substring = parse_strsep(cast, ",");
+				fill_type_instruction(head, i, substring);
+				fill_value_instruction(head, i, substring);
+				ft_strdel(&substring);
 			}
 		}
 	}
+	*data = save;
 	free(new);
 	return (0);
 }

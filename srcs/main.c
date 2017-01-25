@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/29 17:22:15 by jealonso          #+#    #+#             */
-/*   Updated: 2017/01/20 15:17:18 by jealonso         ###   ########.fr       */
+/*   Updated: 2017/01/25 16:53:25 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 **	Dup the buffer, create and push back the new link
 */
 
-static int	get_line(t_head *champ, char *buff, int line)
+static int	get_line(t_head *champ, char **buff, int line)
 {
 	t_lst	*new_line;
 	char	*tmp_buff;
 
-	if (!(tmp_buff = ft_strdup(buff)))
+	if (!(tmp_buff = ft_strdup(*buff)))
 		return (send_id("no_maloc_data", line));
-	ft_strdel(&buff);
+	ft_strdel(buff);
 	if (!(new_line = ft_lst_create_no_malloc(tmp_buff)))
 		return (send_id("no_malloc_link", line));
 	if (!ft_lst_push_back(&champ, new_line))
@@ -47,12 +47,12 @@ static void	init_null(t_head *files, int *line, int *i)
 **	Delete champ data and buffer
 */
 
-static void	delete_all(t_head *champ, char *buff)
+static void	delete_all(t_head *champ, char **buff)
 {
 	t_lst	*save;
 	t_lst	*current;
 
-	ft_strdel(&buff);
+	ft_strdel(buff);
 	if (champ)
 	{
 		current = champ->first;
@@ -60,6 +60,7 @@ static void	delete_all(t_head *champ, char *buff)
 		{
 			save = current;
 			current = current->next;
+		//	ft_putendl(save->data);
 			if ((char *)save->data || *(char *)save->data || save->data)
 				free(save->data);
 			free(save);
@@ -91,13 +92,13 @@ static int	open_files(char *file_name)
 		while (get_next_line(res_open, &buff) > 0)
 		{
 			++line;
-			if (get_line(&champ, buff, line))
+			if (get_line(&champ, &buff, line))
 				i = 1;
 		}
 		if (check_content(champ.first, file_name))
 			i = 1;
 	}
-	delete_all(&champ, buff);
+	delete_all(&champ, &buff);
 	if (close(res_open) < 0)
 		return (send_id("close", 0));
 	return (i);
