@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 15:13:40 by jealonso          #+#    #+#             */
-/*   Updated: 2017/01/25 14:31:08 by jealonso         ###   ########.fr       */
+/*   Updated: 2017/01/26 15:43:22 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void					write_name(char *data, t_header *head,
 		unsigned int *size);
 void					write_comment(char *data, t_header *head,
 		unsigned int *size);
-void					find_pos_label(void	**data, unsigned int *size,
+void					find_pos_label(char	**data, unsigned int *size,
 		t_head *pos);
 char					*parse_strsep(char **str, const char *delim);
 void					print_header(t_header head, int res_open);
@@ -110,7 +110,7 @@ void					create_instruction(t_head *head, int index, char **str);
 int						find_label(unsigned char *flag, int line);
 int						find_flag_inst(unsigned char *flag);
 char					define_type(char *str);
-int						find_instruction(void **data, unsigned char *flag,
+int						find_instruction(char **data, unsigned char *flag,
 		int line, t_head *head);
 void					delete_instruction(t_head *head);
 int						is_t_lab(char *str);

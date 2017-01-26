@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 14:50:30 by jealonso          #+#    #+#             */
-/*   Updated: 2017/01/23 17:44:31 by jealonso         ###   ########.fr       */
+/*   Updated: 2017/01/26 16:19:52 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,15 @@
 
 static void	define_op_code_function(t_lst **elem, int index, char **str)
 {
+	char		*str_trim;
 	extern t_op	g_op_tab[SIZE];
 
 	if ((((t_instruct *)(*elem)->data)->op_code = g_op_tab[index].id))
 	{
-		*str = ft_strtrim(*str);
+		str_trim = ft_strtrim(*str);
+		free(str[1]);
+		str[0] = str_trim;
+		str[1] = str_trim;
 		free(parse_strsep(str, " "));
 	}
 }

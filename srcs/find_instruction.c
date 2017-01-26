@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 18:00:17 by jealonso          #+#    #+#             */
-/*   Updated: 2017/01/25 18:04:06 by jealonso         ###   ########.fr       */
+/*   Updated: 2017/01/26 16:36:15 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,9 @@ static char		*cut_comment(char *str)
 	delete = NULL;
 	cut = NULL;
 	tmp = NULL;
-	ret = str;
-	if ((delete = ft_strrchr(str, ';')) || (delete = ft_strrchr(str, '#')))
+	ret = NULL;
+	if ((delete = ft_strrchr(str, ';'))
+		|| (delete = ft_strrchr(str, '#')))
 	{
 		tmp = ft_strsub(str, 0, delete - str);
 		cut = ft_strtrim(tmp);
@@ -75,9 +76,7 @@ void			fill_type_instruction(t_head *head, int i, char *str)
 	t_instruct	*tmp;
 	char		type;
 	char		*cut;
-	char		*func;
 
-	func = NULL;
 	tmp = (t_instruct *)head->last->data;
 	cut = cut_comment(str);
 	type = define_type(cut);
@@ -95,11 +94,13 @@ void			fill_value_instruction(t_head *head, int i, char *str)
 	t_instruct	*tmp;
 	char		*cut;
 
-	cut = NULL;
 	tmp = (t_instruct *)head->last->data;
 	cut = cut_comment(str);
 	if (cut)
+	{
 		tmp->arg_value[i] = ft_strdup(cut);
+		free(cut);
+	}
 }
 
 /*
@@ -123,20 +124,18 @@ static int				go_out(char *str)
 **	Check if  instructions are valide
 */
 
-int				find_instruction(void **data, unsigned char *flag,
+int				find_instruction(char **cast, unsigned char *flag,
 													int line, t_head *head)
 {
 	char		*new;
 	char		*substring;
 	int			index;
 	int			i;
-	char		**cast;
 	void		*save;
 	extern t_op	g_op_tab[SIZE];
 
 	(void)flag;
-	save = *data;
-	cast = (char **)data;
+	save = *cast;
 	new = ft_strtrim(*cast);
 	if (new && *new && !go_out(new))
 	{
@@ -154,7 +153,7 @@ int				find_instruction(void **data, unsigned char *flag,
 			}
 		}
 	}
-	*data = save;
+	*cast = save;
 	free(new);
 	return (0);
 }

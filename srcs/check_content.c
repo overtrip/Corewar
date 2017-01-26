@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 14:31:12 by jealonso          #+#    #+#             */
-/*   Updated: 2017/01/25 18:04:43 by jealonso         ###   ########.fr       */
+/*   Updated: 2017/01/26 16:33:53 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,25 +58,25 @@ int				check_content(t_lst *champ, char *file_name)
 	t_posandflag	var;
 	t_head			head;
 	t_head			label_pos;
+	char			*cast;
 
 	cpy = champ;
 	(void)file_name;
 	init_vars(&head,&label_pos, &var);
 	while (cpy)
 	{
+		cast = (char*)((char **)cpy->data)[0];
 		++var.line;
-		if (find_prerequis(cpy->data, &var.flag, var.line))
+		if (find_prerequis(cast, &var.flag, var.line))
 			return (1);
 		if (!find_label(&var.flag, var.line))
-			find_pos_label(&cpy->data, &var.pos, &label_pos);
+			find_pos_label(&cast, &var.pos, &label_pos);
 		if (find_flag_inst(&var.flag))
-			if (find_instruction(&cpy->data, &var.flag, var.line, &head))
+			if (find_instruction(cpy->data, &var.flag, var.line, &head))
 				return (1);
 		cpy = cpy->next;
 	}
 	//open_new_file(file_name, &head, &label_pos);
-	//print_label(&label_pos);
-	//print_instruction(&head);
 	delete_label(label_pos.first);
 	delete_instruction(&head);
 	printf("fin\n");

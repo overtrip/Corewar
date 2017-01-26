@@ -6,11 +6,23 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/29 17:22:15 by jealonso          #+#    #+#             */
-/*   Updated: 2017/01/25 16:53:25 by jealonso         ###   ########.fr       */
+/*   Updated: 2017/01/26 16:38:09 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
+
+/*
+**	Create to cut str[0] and free str[1] avoid some leaks
+*/
+
+void		stock_box(char ***box, char *str)
+{
+	if (!(*box = (char **)malloc(sizeof(char *) * 2)))
+		return ;
+	(*box)[0] = str;
+	(*box)[1] = str;
+}
 
 /*
 **	Dup the buffer, create and push back the new link
@@ -20,11 +32,14 @@ static int	get_line(t_head *champ, char **buff, int line)
 {
 	t_lst	*new_line;
 	char	*tmp_buff;
+	char	**box;
 
+	box = NULL;
 	if (!(tmp_buff = ft_strdup(*buff)))
 		return (send_id("no_maloc_data", line));
 	ft_strdel(buff);
-	if (!(new_line = ft_lst_create_no_malloc(tmp_buff)))
+	stock_box(&box, tmp_buff);
+	if (!(new_line = ft_lst_create_no_malloc(box)))
 		return (send_id("no_malloc_link", line));
 	if (!ft_lst_push_back(&champ, new_line))
 		return (send_id("no_malloc_link", line));
@@ -51,6 +66,7 @@ static void	delete_all(t_head *champ, char **buff)
 {
 	t_lst	*save;
 	t_lst	*current;
+	char	*str;
 
 	ft_strdel(buff);
 	if (champ)
@@ -59,10 +75,10 @@ static void	delete_all(t_head *champ, char **buff)
 		while (current)
 		{
 			save = current;
+			str = (char *)((char **)save->data)[1];
 			current = current->next;
-		//	ft_putendl(save->data);
-			if ((char *)save->data || *(char *)save->data || save->data)
-				free(save->data);
+			free(str);
+			free(save->data);
 			free(save);
 			save = NULL;
 		}

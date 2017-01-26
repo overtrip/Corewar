@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 16:37:36 by jealonso          #+#    #+#             */
-/*   Updated: 2017/01/25 18:04:35 by jealonso         ###   ########.fr       */
+/*   Updated: 2017/01/26 15:09:19 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	delete_instruction(t_head *head)
 			free(DATA->arg_value);
 		if (DATA->arg_type)
 			free(DATA->arg_type);
+		free(save->data);
 		free(save);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 15:44:38 by jealonso          #+#    #+#             */
-/*   Updated: 2017/01/23 17:10:10 by jealonso         ###   ########.fr       */
+/*   Updated: 2017/01/26 15:40:38 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,11 @@ static char		*check_is_real(char **str)
 **	Find if line is a label or instruction
 */
 
-void			find_pos_label(void **cast, unsigned int *size, t_head *pos)
+void			find_pos_label(char **data, unsigned int *size, t_head *pos)
 {
 	t_lst	*new;
 	char	*label;
-	char	**data;
 
-	data = (char **)cast;
 	label = NULL;
 	new = NULL;
 	label = *data;
