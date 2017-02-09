@@ -1,36 +1,56 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   atoi.c                                             :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tettouat <tettouat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/03 18:27:57 by jealonso          #+#    #+#             */
-/*   Updated: 2014/11/05 18:46:49 by jealonso         ###   ########.fr       */
+/*   Created: 2014/04/13 17:29:38 by tettouat          #+#    #+#             */
+/*   Updated: 2014/04/13 17:29:39 by tettouat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi(char *str)
-{
-	int	i;
-	int	s;
-	int	nb;
+#include "libft.h"
 
+static int	ft_searchchr(int c)
+{
+	char	*buf;
+	int		i;
+
+	buf = "\n\v\t\r\f ";
 	i = 0;
-	s = 1;
-	nb = 0;
-	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
-		i++;
-	if ((str[i] == '-' || str[i] == '+') && str[i] != '\0')
+	while (i < 6)
 	{
-		if (str[i] == '-')
-			s = -1;
+		if (buf[i] == c)
+			return (1);
 		i++;
 	}
-	while ((str[i] >= '0' && str[i] <= '9') && str[i] != '\0')
+	return (0);
+}
+
+int			ft_atoi(const char *str)
+{
+	int		result;
+	int		is_neg;
+
+	result = 0;
+	is_neg = 1;
+	while (ft_searchchr(*str))
+		str++;
+	while ((*str == '+' || *str == '-') && is_neg == 1)
 	{
-		nb = nb * 10 + (str[i] - 48);
-		i++;
+		if (*str == '-' || *(str + 1) == '+')
+		{
+			is_neg = -1;
+			if (*(str - 1) == '+')
+				str--;
+		}
+		str++;
 	}
-	return (s * nb);
+	while (*str && ft_isdigit(*str))
+	{
+		result = result * 10 + *str - '0';
+		str++;
+	}
+	return (result * is_neg);
 }

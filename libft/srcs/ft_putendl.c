@@ -1,28 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   ft_putendl.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tettouat <tettouat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/08 15:52:33 by jealonso          #+#    #+#             */
-/*   Updated: 2014/11/10 11:35:32 by jealonso         ###   ########.fr       */
+/*   Created: 2013/11/28 09:18:35 by tettouat          #+#    #+#             */
+/*   Updated: 2015/01/20 16:44:37 by tettouat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putendl(char const *s)
+size_t	ft_putendl(char const *s)
 {
-	int	cmp;
-
-	cmp = 0;
-	if (!s)
-		return ;
-	while (s[cmp] != '\0')
-	{
-		ft_putchar(s[cmp]);
-		cmp++;
-	}
-	ft_putchar('\n');
+	return (ft_putstr(s) + ft_putchar('\n'));
 }

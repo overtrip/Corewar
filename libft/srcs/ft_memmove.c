@@ -3,31 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tettouat <tettouat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/03 15:47:50 by jealonso          #+#    #+#             */
-/*   Updated: 2014/11/06 19:48:31 by jealonso         ###   ########.fr       */
+/*   Created: 2014/04/13 17:34:02 by tettouat          #+#    #+#             */
+/*   Updated: 2014/04/13 17:34:02 by tettouat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
-#include <stdlib.h>
+#include "libft.h"
 
-void	*ft_memmove(void *dest, const void *src, size_t len)
+void	*ft_memmove(void *s1, const void *s2, size_t n)
 {
-	char	*copy;
-	char	*p1;
-	size_t	i;
+	char	tmp[n];
 
-	copy = (char *)malloc(sizeof(char *) * len);
-	p1 = (char *)dest;
-	i = 0;
-	while (i <= len)
-	{
-		copy[i] = ((char *)src)[i];
-		i++;
-	}
-	while (len--)
-		p1[len] = copy[len];
-	return (dest);
+	ft_memcpy(tmp, s2, n);
+	ft_memcpy(s1, tmp, n);
+	return (s1);
 }

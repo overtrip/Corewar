@@ -3,35 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tettouat <tettouat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/06 18:24:40 by jealonso          #+#    #+#             */
-/*   Updated: 2014/11/06 19:43:41 by jealonso         ###   ########.fr       */
+/*   Created: 2014/04/13 17:39:50 by tettouat          #+#    #+#             */
+/*   Updated: 2014/04/13 17:39:50 by tettouat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include "libft.h"
 
 char	*ft_strnstr(const char *s1, const char *s2, size_t n)
 {
-	size_t	cmp_tf;
-	size_t	cmp_str;
+	size_t	i;
+	size_t	ptr;
+	size_t	j;
 
-	cmp_tf = 0;
-	cmp_str = 0;
-	if (s2[cmp_tf] == '\0')
-		return ((char *)s1);
-	while (s1[cmp_str] && cmp_str < n)
+	i = 0;
+	ptr = 0;
+	j = 0;
+	while (s1[i] != '\0' && i < n)
 	{
-		while ((s1[cmp_str] == s2[cmp_tf]) && cmp_str < n)
+		if (s2[j] == s1[i])
 		{
-			if (s2[cmp_tf + 1] == '\0')
-				return ((char *)&(s1[(cmp_str - cmp_tf)]));
-			cmp_tf++;
-			cmp_str++;
+			if (j == 0)
+				ptr = i;
+			j++;
 		}
-		cmp_str = cmp_str - cmp_tf + 1;
-		cmp_tf = 0;
+		else
+			j = 0;
+		i++;
+		if (s2[j] == '\0')
+			return ((char *)(s1 + ptr));
 	}
 	return (NULL);
 }

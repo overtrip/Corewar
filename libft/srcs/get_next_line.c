@@ -3,101 +3,115 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tettouat <tettouat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/11 10:57:13 by jealonso          #+#    #+#             */
-/*   Updated: 2015/11/29 15:50:08 by jealonso         ###   ########.fr       */
+/*   Created: 2013/12/02 16:41:23 by tettouat          #+#    #+#             */
+/*   Updated: 2013/12/02 16:41:24 by tettouat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "get_next_line.h"
 
-static size_t	ft_strlen_spe(char *str, char c)
-{
-	size_t	length;
-
-	length = 0;
-	while (str[length] != c && str[length] != '\0')
-		length++;
-	return (length);
-}
-
-static void		ft_strcpy_clean(char dest[BUF_SIZE + 1], char *src)
+int				lenstr(char *str)
 {
 	int		i;
 
 	i = 0;
-	while (src[i] != '\0')
+	if (str)
 	{
-		dest[i] = src[i];
-		i++;
-	}
-	while (i <= BUF_SIZE)
-	{
-		dest[i] = '\0';
-		i++;
-	}
-	return ;
-}
-
-static char		*ft_strjoin_spe(char *s1, char *s2, size_t l_s2)
-{
-	char	*temp;
-	size_t	l_s1;
-	size_t	i;
-
-	i = 0;
-	l_s1 = ft_strlen(s1);
-	temp = (char *)malloc(sizeof(char) * (l_s1 + l_s2 + 1));
-	while (i < l_s1)
-	{
-		temp[i] = s1[i];
-		i++;
-	}
-	i = 0;
-	while (i < l_s2)
-	{
-		temp[i + l_s1] = s2[i];
-		i++;
-	}
-	temp[i + l_s1] = '\0';
-	return (temp);
-}
-
-static void		gnl_subfunc(char buf[BUF_SIZE + 1], size_t len, char *line)
-{
-	if (buf[0] == '\0' && line[0] != '\0')
-		buf[0] = '\0';
-	else
-		ft_strcpy_clean(buf, &(buf[len + 1]));
-	return ;
-}
-
-int				get_next_line(int const fd, char **line)
-{
-	int			ret;
-	char		*temp;
-	size_t		length;
-	static char	buf[BUF_SIZE + 1] = {'\0'};
-
-	*line = ft_strnew(1);
-	ret = 1;
-	while (ret > 0)
-	{
-		if (buf[0] == '\0')
-			ret = read(fd, &buf, BUF_SIZE);
-		if (ret < 0)
-			return (ret);
-		length = ft_strlen_spe(buf, '\n');
-		temp = *line;
-		*line = ft_strjoin_spe(temp, buf, length);
-		free(temp);
-		if (buf[length] != '\0' || (buf[0] == '\0' && *line[0] != '\0'))
+		while (*str)
 		{
-			gnl_subfunc(buf, length, *line);
-			return (1);
+			i++;
+			str++;
 		}
-		ft_strclr((char *)&buf);
 	}
-	return (0);
+	return (i);
+}
+
+static int		find_nl(char *str)
+{
+	char	*bak;
+
+	bak = str;
+	if (str)
+	{
+		while (*str)
+		{
+			if (*str == EOF)
+				return (str - bak - 1);
+			if (*str++ == '\n')
+				return (str - bak - 1);
+		}
+	}
+	return (-1);
+}
+
+static char		*get_next_nl(char **str)
+{
+	int		pos;
+	int		len;
+	char	*ret;
+	char	*bak;
+
+	if ((pos = find_nl(*str)) == -1)
+		return (NULL);
+	if (!(ret = (char *)malloc((pos + 1) * sizeof(*ret))))
+		return (NULL);
+	bak = ret;
+	while ((ret - bak) < pos)
+		*ret++ = *((*str)++);
+	*ret = 0;
+	len = lenstr(*str);
+	if (!(ret = (char *)malloc((lenstr(*str) + 1) * sizeof(*ret))))
+		return (NULL);
+	while (**str)
+		*ret++ = *(++(*str));
+	free(*str - len - pos);
+	*str = ret - len;
+	return (bak);
+}
+
+static char		*concat_string(char *old, char *buf, int n)
+{
+	char	*ret;
+	char	*bak;
+
+	if (!(ret = (char *)malloc((lenstr(old) + n + 1) * sizeof(*ret))))
+		return (NULL);
+	bak = ret;
+	if (old)
+		while (*old)
+			*ret++ = *old++;
+	*(ret + n) = 0;
+	free(old - (ret - bak));
+	while (n--)
+		*(ret + n) = buf[n];
+	return (bak);
+}
+
+int				get_next_line(int fd, char **line)
+{
+	char			*ret;
+	int				nb_read;
+	static char		*old;
+	char			buf[BUFF_SIZE];
+
+	while (!(ret = get_next_nl(&old)))
+	{
+		nb_read = read(fd, buf, BUFF_SIZE);
+		if (!nb_read)
+		{
+			ret = old;
+			*line = ret;
+			return (0);
+		}
+		else if (nb_read == -1)
+		{
+			**line = '\0';
+			return (-1);
+		}
+		old = concat_string(old, buf, nb_read);
+	}
+	*line = ret;
+	return (1);
 }

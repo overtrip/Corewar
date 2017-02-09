@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lst_del_match.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tettouat <tettouat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/30 17:30:12 by jealonso          #+#    #+#             */
-/*   Updated: 2016/10/15 14:37:32 by jealonso         ###   ########.fr       */
+/*   Updated: 2017/02/09 16:05:35 by tettouat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_lst_del_match(t_head *head, void *data, int (*cmp)(void *, void *),
 		void (*del)(void *))
 {
 	t_head	*tmp_head;
-	t_lst	*tmp;
+	t_lists	*tmp;
 
 	tmp_head = head;
 	if (!head)

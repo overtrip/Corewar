@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lst_pop.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tettouat <tettouat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 16:11:36 by jealonso          #+#    #+#             */
-/*   Updated: 2016/10/15 14:41:28 by jealonso         ###   ########.fr       */
+/*   Updated: 2017/02/09 16:06:04 by tettouat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_lst	*ft_lst_pop(t_head *head, size_t pos)
+t_lists	*ft_lst_pop(t_head *head, size_t pos)
 {
-	t_lst	*current;
+	t_lists	*current;
 	size_t	i;
 
 	current = head->first;

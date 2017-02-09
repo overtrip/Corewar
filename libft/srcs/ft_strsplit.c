@@ -3,74 +3,78 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tettouat <tettouat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/08 18:29:58 by jealonso          #+#    #+#             */
-/*   Updated: 2014/11/09 14:49:34 by jealonso         ###   ########.fr       */
+/*   Created: 2014/04/13 17:40:06 by tettouat          #+#    #+#             */
+/*   Updated: 2014/04/13 17:40:06 by tettouat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_issep(char c, char sep)
-{
-	return (c == sep);
-}
-
-static int	ft_num_substr(char const *str, char c)
+static int		calcword(const char *s, char c)
 {
 	int		i;
-	int		num_str;
+	int		word;
 
 	i = 0;
-	num_str = 0;
-	while (str[i])
-	{
-		if (!ft_issep(str[i], c) && (i == 0 || ft_issep(str[i - 1], c)))
-			num_str++;
-		i++;
-	}
-	return (num_str);
-}
-
-static void	ft_put_words(char const *s, char **tab, char c)
-{
-	int			i;
-	int			j;
-	const char	*begin;
-	const char	*end;
-
-	i = 0;
-	j = 0;
-	begin = NULL;
-	end = NULL;
+	word = 0;
 	while (s[i])
 	{
-		if (!ft_issep(s[i], c) && !begin)
-			begin = &s[i];
-		if ((ft_issep(s[i + 1], c) || s[i + 1] == '\0') && begin)
-			end = &s[i];
-		if (begin && end)
-		{
-			tab[j++] = ft_strsub(begin, 0, end - begin + 1);
-			begin = NULL;
-			end = NULL;
-		}
+		if ((s[i] != c && i == 0) || (s[i - 1] == c && s[i] != c))
+			word++;
 		i++;
 	}
+	return (word);
 }
 
-char		**ft_strsplit(char const *s, char c)
+static char		**malloctab(char const *s, int c)
+{
+	int		numword;
+
+	if (s)
+	{
+		numword = calcword(s, c);
+		return ((char **)ft_memalloc(sizeof(char *) * (numword + 1)));
+	}
+	return (NULL);
+}
+
+static int		calcmalloc(char const *s, int i, int c)
+{
+	int		n;
+
+	n = i;
+	while (s[n] != c && s[n])
+		n++;
+	return (n);
+}
+
+char			**ft_strsplit(char const *s, char c)
 {
 	char	**tab;
-	int		num_str;
+	int		i;
+	int		n;
+	int		j;
 
-	if (!s || !c)
+	if (s == NULL || (tab = malloctab(s, c)) == NULL)
 		return (NULL);
-	num_str = ft_num_substr(s, c);
-	if (!(tab = (char **)malloc(sizeof(char *) * (num_str + 1))))
-		return (NULL);
-	ft_put_words(s, tab, c);
-	tab[num_str] = NULL;
+	i = -1;
+	n = 0;
+	while (s[++i])
+	{
+		if (s[i] != c)
+		{
+			if (tab[n] == NULL)
+			{
+				j = 0;
+				if ((tab[n] = ft_strnew(calcmalloc(s, i, c) + 2)) == NULL)
+					return (NULL);
+			}
+			tab[n][j++] = s[i];
+		}
+		else if (tab[n] != NULL)
+			n++;
+	}
 	return (tab);
 }

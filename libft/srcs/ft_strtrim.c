@@ -3,38 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tettouat <tettouat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/25 19:49:26 by jealonso          #+#    #+#             */
-/*   Updated: 2016/10/25 16:20:04 by jealonso         ###   ########.fr       */
+/*   Created: 2014/04/13 17:40:26 by tettouat          #+#    #+#             */
+/*   Updated: 2014/04/13 17:40:27 by tettouat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
-static int	ft_iswhitespace(char c)
+static int	ft_isspace(char c)
 {
-	if (c == 32 || c == '\n' || c == '\t')
+	if (c == ' ' || c == '\n' || c == '\t')
 		return (1);
-	else
-		return (0);
+	return (0);
 }
 
 char		*ft_strtrim(char const *s)
 {
-	size_t			length;
-	char			*new;
-	unsigned int	i;
+	char	*tmp;
+	size_t	len;
 
-	if (!s)
+	if (s == NULL)
 		return (NULL);
-	i = 0;
-	length = ft_strlen(s);
-	while (s[i] && ft_iswhitespace(s[i]))
-		i++;
-	while (length > i && ft_iswhitespace(s[length - 1]))
-		length--;
-	new = ft_strsub(s, i, length - i);
-	return (new);
+	tmp = (char *)s;
+	while (ft_isspace(*tmp))
+		tmp++;
+	len = ft_strlen(tmp);
+	if (len)
+	{
+		while (ft_isspace(tmp[--len]) || *tmp == '\0')
+			;
+		tmp = ft_strsub(tmp, 0, (len + 1));
+	}
+	else
+	{
+		tmp = ft_strnew(1);
+	}
+	return (tmp);
 }

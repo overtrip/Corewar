@@ -3,136 +3,190 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+         #
+#    By: tettouat <tettouat@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2014/11/09 16:51:42 by jealonso          #+#    #+#              #
-#    Updated: 2016/12/08 15:49:56 by jealonso         ###   ########.fr        #
+#    Created: 2014/05/30 11:06:29 by tettouat          #+#    #+#              #
+#    Updated: 2017/02/09 16:24:21 by tettouat         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-.SUFFIXES:
+NAME =	libft.a
 
-.PHONY: all re clean fclean casm ccf
+FLAG =	-Wall -Wextra -Werror
 
-NAME = libft.a
+SRCDIR = srcs/
 
-INCPATH = includes
+INCDIR = includes/
 
-OBJSPATH = objs
+OBJDIR = objs/
 
-AR = ar
+SRC =	ft_memset.c \
+		ft_bzero.c \
+		ft_memcpy.c \
+		ft_memccpy.c \
+		ft_memmove.c \
+		ft_memchr.c \
+		ft_memcmp.c \
+		ft_strlen.c \
+		ft_strdup.c \
+		ft_strcpy.c \
+		ft_strncpy.c \
+		ft_strcat.c \
+		ft_strncat.c \
+		ft_strlcat.c \
+		ft_strchr.c \
+		ft_strrchr.c \
+		ft_strstr.c \
+		ft_strnstr.c \
+		ft_strcmp.c \
+		ft_strncmp.c \
+		ft_atoi.c \
+		ft_isalpha.c \
+		ft_isdigit.c \
+		ft_isalnum.c \
+		ft_isascii.c \
+		ft_isprint.c \
+		ft_toupper.c \
+		ft_tolower.c \
+		ft_memalloc.c \
+		ft_memdel.c \
+		ft_strnew.c \
+		ft_strdel.c \
+		ft_strclr.c \
+		ft_striter.c \
+		ft_striteri.c \
+		ft_strmap.c \
+		ft_strmapi.c \
+		ft_strequ.c \
+		ft_strnequ.c \
+		ft_strsub.c \
+		ft_strjoin.c \
+		ft_strtrim.c \
+		ft_strsplit.c \
+		ft_itoa.c \
+		ft_putchar.c \
+		ft_putstr.c \
+		ft_putendl.c \
+		ft_putnbr.c \
+		ft_putchar_fd.c \
+		ft_putstr_fd.c \
+		ft_putendl_fd.c \
+		ft_putnbr_fd.c \
+		get_next_line.c \
+		lstd_back.c	\
+		lstd_clear.c \
+		lstd_del.c \
+		lstd_do.c \
+		lstd_front.c \
+		lstd_get_last.c \
+		lstd_map.c \
+		lstd_new.c \
+		lstd_pop_back.c \
+		lstd_pop_front.c \
+		lstd_push_after.c \
+		lstd_push_back.c \
+		lstd_push_before.c \
+		lstd_push_cond.c \
+		lstd_push_front.c \
+		lstd_rmap.c \
+		lstd_size.c \
+		ft_list_push_back.c \
+		ft_lst_create_no_malloc.c \
+		ft_lst_del_match.c \
+		ft_lst_del.c \
+		ft_lst_foreach.c \
+		ft_lst_init_head.c \
+		ft_lst_match.c \
+		ft_lst_pop.c \
+		ft_lst_push_back.c \
+		ft_lst_push_front.c \
+		ini_strerror.c \
+		ft_strerror.c \
+		ft_isnumber.c \
+		ft_strndup.c \
+		ft_strsplit_ft.c \
+		ft_isblank.c \
+		ft_tablen.c \
+		ft_tabdup.c \
+		ft_puttab.c \
+		ft_list.c \
+		ft_strprefix.c \
+		ft_strsplitwith.c \
+		ft_min.c \
+		ft_ltoa.c \
+		ft_chartostr.c \
+		ft_keepstring.c \
+		ft_keepstring_inv.c \
+		ft_nbrlen.c \
+		ft_delstr.c \
+		ft_putstr_len.c \
+		ft_putwchar.c \
+		ft_putwstr.c \
+		ft_lenwchar.c \
+		ft_lenwstr.c \
+		ft_aisi.c \
+		ft_max.c \
+		ft_straddchar.c \
+		ft_ftoa.c \
+		ft_table_size.c \
+		ft_table_clear.c \
+		ft_strtable_clear.c \
+		ft_printf/add/add_char.c \
+		ft_printf/add/add_string.c \
+		ft_printf/add/add_wchar.c \
+		ft_printf/add/fill_character.c \
+		ft_printf/color/color_basic.c \
+		ft_printf/color/color_fg_bg.c \
+		ft_printf/color/color_format.c \
+		ft_printf/color/concat.c \
+		ft_printf/color/replace_color.c \
+		ft_printf/conversion/b.c \
+		ft_printf/conversion/big_d.c \
+		ft_printf/conversion/c.c \
+		ft_printf/conversion/f.c \
+		ft_printf/conversion/i.c \
+		ft_printf/conversion/o.c \
+		ft_printf/conversion/p.c \
+		ft_printf/conversion/s.c \
+		ft_printf/conversion/u.c \
+		ft_printf/conversion/x.c \
+		ft_printf/flags/flags.c \
+		ft_printf/flags/modifiers.c \
+		ft_printf/format.c \
+		ft_printf/function_conversion.c \
+		ft_printf/init/ini_printf.c \
+		ft_printf/label/number.c \
+		ft_printf/label/number2.c \
+		ft_printf/label/number_left.c \
+		ft_printf/label/string.c \
+		ft_printf/label/wstr_to_str.c \
+		ft_printf/ft_printf.c
 
-RANLIB = ranlib
+SRCS = $(addprefix $(SRCDIR), $(SRC))
 
-SRCSPATH = srcs
+OBJ = $(addprefix $(OBJDIR), $(SRC:.c=.o))
 
-OBJSPATH = objs
+all: $(NAME)
 
-SRCS = \
-	ft_atoi.c \
-	ft_bzero.c \
-	ft_create_elem.c \
-	ft_isalnum.c \
-	ft_isalpha.c \
-	ft_isascii.c \
-	ft_isdigit.c \
-	ft_islower.c \
-	ft_isnumber.c \
-	ft_isprint.c \
-	ft_isupper.c \
-	ft_itoa.c \
-	ft_list_push_back.c \
-	ft_lst_create_no_malloc.c \
-	ft_lst_del.c \
-	ft_lst_del_match.c \
-	ft_lst_foreach.c \
-	ft_lst_init_head.c \
-	ft_lst_match.c \
-	ft_lst_pop.c \
-	ft_lst_push_back.c \
-	ft_lst_push_front.c \
-	ft_lstadd.c \
-	ft_memalloc.c \
-	ft_memccpy.c \
-	ft_memchr.c \
-	ft_memcmp.c \
-	ft_memcpy.c \
-	ft_memdel.c \
-	ft_memmove.c \
-	ft_memset.c \
-	ft_putchar.c \
-	ft_putchar_fd.c \
-	ft_putchar_l.c \
-	ft_putendl.c \
-	ft_putendl_fd.c \
-	ft_putlist.c \
-	ft_putnbr.c \
-	ft_putnbr_fd.c \
-	ft_putnbr_long.c \
-	ft_putstr.c \
-	ft_putstr_fd.c \
-	ft_strcat.c \
-	ft_strchr.c \
-	ft_strclr.c \
-	ft_strcmp.c \
-	ft_strcpy.c \
-	ft_strdel.c \
-	ft_strdup.c \
-	ft_strequ.c \
-	ft_striter.c \
-	ft_striteri.c \
-	ft_strjoin.c \
-	ft_strlcat.c \
-	ft_strlen.c \
-	ft_strmap.c \
-	ft_strmapi.c \
-	ft_strncat.c \
-	ft_strncmp.c \
-	ft_strncpy.c \
-	ft_strndup.c \
-	ft_strnequ.c \
-	ft_strnew.c \
-	ft_strnstr.c \
-	ft_strrchr.c \
-	ft_strsep.c \
-	ft_strsplit.c \
-	ft_strstr.c \
-	ft_strsub.c \
-	ft_strtrim.c \
-	ft_swap.c \
-	ft_swap_str.c \
-	ft_tolower.c \
-	ft_toupper.c \
-	get_next_line.c
+$(OBJDIR):
+	@mkdir -p $(OBJDIR)
+	@mkdir -p $(dir $(OBJ))
 
-CFLAGS = -Wall -Werror -Wextra -I $(INCPATH)
+$(OBJDIR)%.o : $(SRCDIR)%.c | $(OBJDIR)
+	@gcc $(FLAGS) -c $< -o $@ -I $(INCDIR)
 
-COBJS =  $(patsubst %.c, $(OBJSPATH)/%.o, $(SRCS))
-
-HEAD = $(patsubst %.h, $(INCPATH)/%.h, $(HFILES))
-
-all: $(OBJSPATH) $(NAME)
-
-$(NAME): ccf $(COBJS)
-	@ $(AR) -rc $@ $(COBJS)
-	@$(RANLIB) $@
-	@echo "\033[1;32;41m\nAll is done!\033[0m"
-
-ccf:
-	@echo "\033[1;33;105mCompilation libft\033[0m"
-
-$(OBJSPATH)/%.o: $(SRCSPATH)/%.c $(HEAD)
-	@$(CC) $(CFLAGS) -c -o $@ $<
+$(NAME): $(OBJDIR) $(OBJ)
+	@ar rc $(NAME) $(OBJ)
+	@ranlib $(NAME)
 
 clean:
-	@/bin/rm -rf $(OBJSPATH)
-	@echo "Delete objs file"
+	if [[ -d $(OBJDIR) ]]; then rm -r $(OBJDIR); fi
 
 fclean: clean
-	@/bin/rm -rf $(NAME)
-	@echo "Delete objs file and executable    "
+	@rm -f $(NAME)
 
 re: fclean all
 
-$(OBJSPATH) :
-	@mkdir $@
+.PHONY: fclean clean re
+
+.SILENT: clean

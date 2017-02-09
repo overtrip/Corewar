@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lst_create_no_malloc.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tettouat <tettouat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/30 16:28:49 by jealonso          #+#    #+#             */
-/*   Updated: 2016/10/15 17:08:17 by jealonso         ###   ########.fr       */
+/*   Updated: 2017/02/09 16:11:27 by tettouat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_lst	*ft_lst_create_no_malloc(void *data)
+t_lists	*ft_lst_create_no_malloc(void *data)
 {
-	t_lst	*new;
+	t_lists	*new;
 
-	if (!(new = (t_lst *)malloc(sizeof(t_lst))))
+	if (!(new = (t_lists *)malloc(sizeof(t_lists))))
 		return (NULL);
 	else
 	{

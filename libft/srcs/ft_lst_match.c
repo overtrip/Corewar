@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lst_match.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tettouat <tettouat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/30 14:28:59 by jealonso          #+#    #+#             */
-/*   Updated: 2016/11/28 13:41:43 by jealonso         ###   ########.fr       */
+/*   Updated: 2017/02/09 16:14:58 by tettouat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_lst	*ft_lst_match(t_head *head, void *data, int (*cmp)(void *, void *))
+t_lists	*ft_lst_match(t_head *head, void *data, int (*cmp)(void *, void *))
 {
 	t_head	*tmp;
 	t_head	*new_head;

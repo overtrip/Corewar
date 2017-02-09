@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lst_push_front.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tettouat <tettouat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 14:01:08 by jealonso          #+#    #+#             */
-/*   Updated: 2016/10/15 14:44:54 by jealonso         ###   ########.fr       */
+/*   Updated: 2017/02/09 16:06:24 by tettouat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_lst_push_front(t_head *head, t_lst *elem)
+int	ft_lst_push_front(t_head *head, t_lists *elem)
 {
 	if (elem)
 	{

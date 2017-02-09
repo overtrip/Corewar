@@ -3,17 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tettouat <tettouat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/08 16:06:49 by jealonso          #+#    #+#             */
-/*   Updated: 2015/03/25 17:25:55 by jealonso         ###   ########.fr       */
+/*   Created: 2013/11/22 10:05:32 by tettouat          #+#    #+#             */
+/*   Updated: 2015/01/20 16:44:39 by tettouat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr(char const *s)
+size_t		ft_putstr(char const *s)
 {
+	int		nbr;
+
 	if (s)
-		write(1, s, ft_strlen(s));
+	{
+		nbr = ft_strlen(s);
+		write(1, s, nbr);
+		return (nbr);
+	}
+	else
+		return (ft_putstr("(null)"));
 }

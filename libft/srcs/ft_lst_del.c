@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lst_del.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tettouat <tettouat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/30 16:59:49 by jealonso          #+#    #+#             */
-/*   Updated: 2016/10/18 13:34:55 by jealonso         ###   ########.fr       */
+/*   Updated: 2017/02/09 16:05:24 by tettouat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	ft_lst_del(t_head *head)
 {
-	t_lst	*save;
-	t_lst	*current;
+	t_lists	*save;
+	t_lists	*current;
 
 	if (!head)
 		return ;

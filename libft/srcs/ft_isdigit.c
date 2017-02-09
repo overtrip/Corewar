@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_digit.c                                         :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tettouat <tettouat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/05 14:27:28 by jealonso          #+#    #+#             */
-/*   Updated: 2014/11/05 14:53:14 by jealonso         ###   ########.fr       */
+/*   Created: 2014/04/13 17:30:41 by tettouat          #+#    #+#             */
+/*   Updated: 2014/04/13 17:30:41 by tettouat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isdigit(int c)
+int		ft_isdigit(int c)
 {
-	if (c >= 48 && c <= 57)
+	if (('0' <= c) && (c <= '9'))
 		return (1);
 	return (0);
 }
