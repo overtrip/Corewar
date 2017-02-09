@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 16:37:36 by jealonso          #+#    #+#             */
-/*   Updated: 2017/01/26 15:09:19 by jealonso         ###   ########.fr       */
+/*   Updated: 2017/01/30 13:43:50 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	delete_instruction(t_head *head)
 {
-	t_lst	*elem;
-	t_lst	*save;
-	int		i;
-	int		size;
+	t_lst		*elem;
+	t_lst		*save;
+	int			i;
+	int			size;
 	extern t_op g_op_tab[SIZE];
 
 	if (!head)

@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 18:00:17 by jealonso          #+#    #+#             */
-/*   Updated: 2017/01/26 16:36:15 by jealonso         ###   ########.fr       */
+/*   Updated: 2017/02/09 16:27:21 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,27 @@ static char		*cut_comment(char *str)
 		ret = ft_strtrim(str);
 	return (ret);
 }
+/*
+**	Check if T_DIR size is 2 or 4 octets
+*/
+
+int				size_arg(char value, int op_code)
+{
+	int			size;
+	extern t_op	g_op_tab[SIZE];
+
+	size = g_op_tab[op_code].label_size;
+	if (value == T_DIR)
+		return (size == 2 ? 2 : 4);
+	return (0);
+}
 
 /*
 **	filing struct with elements
 */
 
-void			fill_type_instruction(t_head *head, int i, char *str)
+void			fill_type_instruction(t_head *head, int i, char *str,
+															unsigned int pos)
 {
 	t_instruct	*tmp;
 	char		type;
@@ -82,7 +97,10 @@ void			fill_type_instruction(t_head *head, int i, char *str)
 	type = define_type(cut);
 	free(cut);
 	if (type)
+	{
 		tmp->arg_type[i] = type;
+		pos += size_arg(type, (int)(tmp)->op_code);
+	}
 }
 
 /*
@@ -107,7 +125,7 @@ void			fill_value_instruction(t_head *head, int i, char *str)
 **	Check if line is a comment or a label
 */
 
-static int				go_out(char *str)
+static int		go_out(char *str)
 {
 	char	*find;
 
@@ -124,8 +142,7 @@ static int				go_out(char *str)
 **	Check if  instructions are valide
 */
 
-int				find_instruction(char **cast, unsigned char *flag,
-													int line, t_head *head)
+int				find_instruction(char **cast, t_posandflag *var, t_head *head)
 {
 	char		*new;
 	char		*substring;
@@ -134,20 +151,19 @@ int				find_instruction(char **cast, unsigned char *flag,
 	void		*save;
 	extern t_op	g_op_tab[SIZE];
 
-	(void)flag;
 	save = *cast;
 	new = ft_strtrim(*cast);
 	if (new && *new && !go_out(new))
 	{
-		index = search_instruction(new, line);
+		index = search_instruction(new, var->line);
 		if (index > -1 && index < SIZE)
 		{
 			i = -1;
-			create_instruction(head, index, cast);
+			create_instruction(head, index, cast, var);
 			while (++i < g_op_tab[index].nb_arg)
 			{
 				substring = parse_strsep(cast, ",");
-				fill_type_instruction(head, i, substring);
+				fill_type_instruction(head, i, substring, var->pos);
 				fill_value_instruction(head, i, substring);
 				ft_strdel(&substring);
 			}

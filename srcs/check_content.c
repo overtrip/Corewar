@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 14:31:12 by jealonso          #+#    #+#             */
-/*   Updated: 2017/01/26 16:33:53 by jealonso         ###   ########.fr       */
+/*   Updated: 2017/01/30 15:00:52 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,7 @@ int				check_content(t_lst *champ, char *file_name)
 	char			*cast;
 
 	cpy = champ;
-	(void)file_name;
-	init_vars(&head,&label_pos, &var);
+	init_vars(&head, &label_pos, &var);
 	while (cpy)
 	{
 		cast = (char*)((char **)cpy->data)[0];
@@ -72,11 +71,11 @@ int				check_content(t_lst *champ, char *file_name)
 		if (!find_label(&var.flag, var.line))
 			find_pos_label(&cast, &var.pos, &label_pos);
 		if (find_flag_inst(&var.flag))
-			if (find_instruction(cpy->data, &var.flag, var.line, &head))
+			if (find_instruction(cpy->data, &var, &head))
 				return (1);
 		cpy = cpy->next;
 	}
-	//open_new_file(file_name, &head, &label_pos);
+	open_new_file(file_name, &head, &label_pos);
 	delete_label(label_pos.first);
 	delete_instruction(&head);
 	printf("fin\n");

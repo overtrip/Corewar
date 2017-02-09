@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 14:50:30 by jealonso          #+#    #+#             */
-/*   Updated: 2017/01/26 16:19:52 by jealonso         ###   ########.fr       */
+/*   Updated: 2017/02/09 15:59:19 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 **	Complete field of op_code instruction
 */
 
-static void	define_op_code_function(t_lst **elem, int index, char **str)
+static void	define_op_code_function(t_lst **elem, int index, char **str,
+															unsigned int pos)
 {
 	char		*str_trim;
 	extern t_op	g_op_tab[SIZE];
@@ -28,6 +29,7 @@ static void	define_op_code_function(t_lst **elem, int index, char **str)
 		str[0] = str_trim;
 		str[1] = str_trim;
 		free(parse_strsep(str, " "));
+		pos += 2;
 	}
 }
 
@@ -53,7 +55,8 @@ static void	init_field(t_instruct *new, int index)
 **	Create and completed a new elem of instruction
 */
 
-void		create_instruction(t_head *head, int index, char **str)
+void		create_instruction(t_head *head, int index, char **str,
+															t_posandflag* var)
 {
 	t_lst		*new;
 	t_instruct	*tmp;
@@ -69,6 +72,6 @@ void		create_instruction(t_head *head, int index, char **str)
 		return ;
 	init_field(tmp, g_op_tab[index].nb_arg);
 	new = ft_lst_create_no_malloc(tmp);
-	define_op_code_function(&new, index, str);
+	define_op_code_function(&new, index, str, var->pos);
 	ft_lst_push_back(&head, new);
 }

@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 13:29:44 by jealonso          #+#    #+#             */
-/*   Updated: 2017/01/23 14:56:59 by jealonso         ###   ########.fr       */
+/*   Updated: 2017/01/30 13:42:47 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 **	Check if char is a label_char
 */
 
-int	is_t_lab(char *str)
+int			is_t_lab(char *str)
 {
 	char	*tmp;
 	char	*current;

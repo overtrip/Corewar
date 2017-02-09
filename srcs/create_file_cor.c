@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 16:09:52 by jealonso          #+#    #+#             */
-/*   Updated: 2017/01/20 16:35:26 by jealonso         ###   ########.fr       */
+/*   Updated: 2017/01/30 14:53:47 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,13 @@ static void		write_instruction(t_lst *champ, int res_open)
 	init_head(&head, &size);
 	while (cpy)
 	{
+		printf("[%s]\n", cpy->data);
 		if (!ft_strncmp(cpy->data, NAME_CMD_STRING, ft_strlen(NAME_CMD_STRING)))
 			write_name(cpy->data, &head, &size);
 		if (!ft_strncmp(cpy->data, COMMENT_CMD_STRING,
 					ft_strlen(COMMENT_CMD_STRING)))
 			write_comment(cpy->data, &head, &size);
-		find_pos_label(cpy->data, &size, label_list);
+	//	find_pos_label(cpy->data, &size, label_list);
 		cpy = cpy->next;
 	}
 	print_header(head, res_open);
@@ -79,22 +80,14 @@ static char		*change_name(char *file_name)
 {
 	char	*final_path;
 	char	*name;
-	char	*extenssion;
 
+	name = NULL;
 	final_path = NULL;
-	extenssion = NULL;
-	name = ft_strrchr(file_name, '/');
-	file_name = ft_strndup(file_name, name - file_name);
-	if (name)
-	{
-		extenssion = ft_strrchr(name, '.');
-		extenssion = ft_strndup(name, extenssion - name);
-		name = ft_strjoin(file_name, extenssion);
-		final_path = ft_strjoin(name, ".cor");
-		free(name);
-		free(extenssion);
-	}
-	free(file_name);
+	if (!(final_path = ft_strrchr(file_name, '.')))
+		return (NULL);
+	name = ft_strndup(file_name, final_path - file_name);
+	final_path = ft_strjoin(name, ".cor");
+	free(name);
 	return (final_path);
 }
 
