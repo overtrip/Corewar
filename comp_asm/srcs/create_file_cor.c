@@ -6,7 +6,7 @@
 /*   By: tettouat <tettouat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 16:09:52 by jealonso          #+#    #+#             */
-/*   Updated: 2017/02/09 16:51:30 by tettouat         ###   ########.fr       */
+/*   Updated: 2017/02/10 17:51:34 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,13 @@ static void		init_head(t_header *head, unsigned int *size)
 **	Write in file all values converted
 */
 
-static void		write_instruction(t_lists *champ, int res_open)
+static void		write_header(t_lists *champ, int res_open)
 {
 	t_lists			*cpy;
 	t_header		head;
 	int				line;
 	unsigned int	size;
+	char			*cast;
 	t_head			*label_list;
 
 	cpy = champ;
@@ -60,13 +61,12 @@ static void		write_instruction(t_lists *champ, int res_open)
 	init_head(&head, &size);
 	while (cpy)
 	{
-		printf("[%s]\n", cpy->data);
-		if (!ft_strncmp(cpy->data, NAME_CMD_STRING, ft_strlen(NAME_CMD_STRING)))
-			write_name(cpy->data, &head, &size);
-		if (!ft_strncmp(cpy->data, COMMENT_CMD_STRING,
+		cast = (char*)((char **)cpy->data)[0];
+		if (!ft_strncmp(cast, NAME_CMD_STRING, ft_strlen(NAME_CMD_STRING)))
+			write_name(cast, &head, &size);
+		if (!ft_strncmp(cast, COMMENT_CMD_STRING,
 					ft_strlen(COMMENT_CMD_STRING)))
-			write_comment(cpy->data, &head, &size);
-	//	find_pos_label(cpy->data, &size, label_list);
+			write_comment(cast, &head, &size);
 		cpy = cpy->next;
 	}
 	print_header(head, res_open);
@@ -95,16 +95,18 @@ static char		*change_name(char *file_name)
 **	Create, open, call a writen function and close the new file.cor
 */
 
-void			open_new_file(char *file_name, t_head *head, t_head *label_pos)
+void			open_new_file(char *file_name, t_head *head, t_head *label_pos,
+															t_lists *champ)
 {
 	int		res_open;
 
-	//TODO Modif that !!
 	(void)label_pos;
+	(void)head;
 	file_name = change_name(file_name);
 	if ((res_open = open(file_name, O_RDWR | O_CREAT | O_TRUNC, 0755)) < 0)
 		send_id("", 0);
-	write_instruction(head->first, res_open);
+	write_header(champ, res_open);
+	wirte_instruction(head, label_pos);
 	if (close(res_open) < 0)
 		return ;
 	free(file_name);

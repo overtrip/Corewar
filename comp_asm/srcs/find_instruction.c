@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 18:00:17 by jealonso          #+#    #+#             */
-/*   Updated: 2017/02/09 16:27:21 by jealonso         ###   ########.fr       */
+/*   Updated: 2017/02/10 16:02:49 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ static char		*cut_comment(char *str)
 		ret = ft_strtrim(str);
 	return (ret);
 }
+
 /*
 **	Check if T_DIR size is 2 or 4 octets
 */
@@ -78,6 +79,10 @@ int				size_arg(char value, int op_code)
 	size = g_op_tab[op_code].label_size;
 	if (value == T_DIR)
 		return (size == 2 ? 2 : 4);
+	if (value == T_REG)
+		return (1);
+	if (value == T_IND)
+		return (2);
 	return (0);
 }
 
@@ -86,7 +91,7 @@ int				size_arg(char value, int op_code)
 */
 
 void			fill_type_instruction(t_head *head, int i, char *str,
-															unsigned int pos)
+															unsigned int *pos)
 {
 	t_instruct	*tmp;
 	char		type;
@@ -99,7 +104,7 @@ void			fill_type_instruction(t_head *head, int i, char *str,
 	if (type)
 	{
 		tmp->arg_type[i] = type;
-		pos += size_arg(type, (int)(tmp)->op_code);
+		*pos += size_arg(type, (int)(tmp)->op_code);
 	}
 }
 
@@ -160,10 +165,12 @@ int				find_instruction(char **cast, t_posandflag *var, t_head *head)
 		{
 			i = -1;
 			create_instruction(head, index, cast, var);
+			if (g_op_tab[index].nb_arg > 1)
+				var->pos += 2;
 			while (++i < g_op_tab[index].nb_arg)
 			{
 				substring = parse_strsep(cast, ",");
-				fill_type_instruction(head, i, substring, var->pos);
+				fill_type_instruction(head, i, substring, &var->pos);
 				fill_value_instruction(head, i, substring);
 				ft_strdel(&substring);
 			}

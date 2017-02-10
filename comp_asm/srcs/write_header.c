@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 15:27:21 by jealonso          #+#    #+#             */
-/*   Updated: 2017/01/30 14:51:20 by jealonso         ###   ########.fr       */
+/*   Updated: 2017/02/10 17:44:00 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	write_name(char *data, t_header *head, unsigned int *size)
 
 	first = NULL;
 	end = NULL;
-	printf("[%s](write_name)\n", data);
 	first = ft_strchr(data, '"');
 	end = ft_strchr(++first, '"');
 	ft_memset(head->prog_name, '\0', PROG_NAME_LENGTH + 1);

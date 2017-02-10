@@ -6,7 +6,7 @@
 /*   By: tettouat <tettouat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 14:31:12 by jealonso          #+#    #+#             */
-/*   Updated: 2017/02/09 16:50:43 by tettouat         ###   ########.fr       */
+/*   Updated: 2017/02/10 17:15:59 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int				check_content(t_lists *champ, char *file_name)
 				return (1);
 		cpy = cpy->next;
 	}
-	open_new_file(file_name, &head, &label_pos);
+	open_new_file(file_name, &head, &label_pos, champ);
 	delete_label(label_pos.first);
 	delete_instruction(&head);
 	printf("fin\n");

@@ -6,7 +6,7 @@
 /*   By: tettouat <tettouat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 15:13:40 by jealonso          #+#    #+#             */
-/*   Updated: 2017/02/09 16:50:08 by tettouat         ###   ########.fr       */
+/*   Updated: 2017/02/10 17:51:23 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,11 +97,12 @@ int						check_content(t_lists *champ, char *file_name);
 int						find_prerequis(char *data, unsigned char *flag,
 		int line);
 void					open_new_file(char *file_name, t_head *head,
-		t_head *label_pos);
+		t_head *label_pos, t_lists *champ);
 void					write_name(char *data, t_header *head,
 		unsigned int *size);
 void					write_comment(char *data, t_header *head,
 		unsigned int *size);
+void					write_instruction(t_head *ordre, t_head *label);
 void					find_pos_label(char	**data, unsigned int *size,
 		t_head *pos);
 char					*parse_strsep(char **str, const char *delim);

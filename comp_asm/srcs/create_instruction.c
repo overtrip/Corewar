@@ -6,7 +6,7 @@
 /*   By: tettouat <tettouat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/23 14:50:30 by jealonso          #+#    #+#             */
-/*   Updated: 2017/02/09 16:52:15 by tettouat         ###   ########.fr       */
+/*   Updated: 2017/02/10 16:46:22 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	init_field(t_instruct *new, int index)
 */
 
 void		create_instruction(t_head *head, int index, char **str,
-															t_posandflag* var)
+															t_posandflag *var)
 {
 	t_lists		*new;
 	t_instruct	*tmp;
